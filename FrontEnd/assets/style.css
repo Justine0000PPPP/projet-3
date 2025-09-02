@@ -260,27 +260,80 @@
 		text-align: center;
 
 	}
-/* 
+
+
 	/* style des modals */
 
-		.modal {
+		/* .modal {
 			position:fixed;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			top: 0;
 			left: 0;
-			width: 100%;
-			height: 100%;
-			/* background: rgba(0, 0, 0, 8, 8,); */ 
-		}
+			width: 40%;
+			height: 70%;
+			background-color: rgb(152, 226, 159)	;
+			
+		} */
 
-		.modal-vraper {
+		.modal-#raper {
+			text-align: center;
 			overflow: auto;
-			width: 600px²;
+			width: 600px;
 			height: 400px;
-			max-height: calc(a00vh -20px);
-			max-width: calc(a00vh -20px);
-			padding: 25%;
-			background-color: rgb(211, 210, 155);
+			max-height: calc(100vh -20px);
+			max-width: calc(100vw -20px);
+			padding: 0%;
+			background-color: goldenrod;
 			} 
+
+
+/* 
+pour que je repaire  le bouton pour linstent sera enlever apres */
+ .js-modal { 
+    background-color: red;
+    color: white; /* pour que le texte soit lisible */
+    padding: 8px 15px; /* un peu d'espace autour du texte */
+    border-radius: 4px; /* arrondir un peu les coins, optionnel */
+    text-decoration: none; /* enlever le soulignement du lien */
+    display: inline-block; /* pour que le padding fonctionne bien */
+}
+
+	/* style des modals */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; 
+    align-items: center;
+    justify-content: center;
+    
+	}
+
+
+.modal-page1, .modal-page2, .modal-page3 {
+  text-align: center;
+  overflow: auto;
+  width: 600px;       
+  height: 400px;     
+  padding: 20px;     
+  margin: auto;       
+  background-color: rgb(187, 185, 179);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* 
+pour redimentionner les photos  */
+#photomodal {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
