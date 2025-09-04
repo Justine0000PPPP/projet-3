@@ -1,5 +1,4 @@
 
-
     fetch('http://localhost:5678/api/works')
       .then(response => {
         if (!response.ok) {
@@ -66,7 +65,7 @@ const btntous = document.createElement('button');
     filterImagesByCategory(0);
         }); 
 
-    
+     
   });
 
   // Fonction pour filtrer les images selon l'id de catégorie  

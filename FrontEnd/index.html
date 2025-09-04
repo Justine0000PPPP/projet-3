@@ -49,20 +49,20 @@
 		</section>
 
 		<a href="#modal" class="js-modal">ouvrire la modal </a>
-		<aside id="modal" class="modal"   style="display: none;">
-			<div id="modal-page1">
+		<aside id="modal" class="modal">
+			<div id="modal-page1" style="display: block;">
 				<h3 class="titre">galerie photo </h3> 
 				<section id="photomodal">
 
 				</section> 
 				<button id="ajouterphoto">ajouter une photo</button>  			
 			</div> 
-			<div id="modal-page2">
+			<div id="modal-page2" style="display: none;">
 				<h3 class="titre">ajout  photo </h3>
 				<p>page 2222222222222222222</p> 
 				<input id="ajouterphotop2" type="submit" value="ajouter une photo"> 
 			</div>
-			<div id="modal-page3">
+			<div id="modal-page3" style="display: none;">
 				<h3 class="titre">ajout  photo </h3>
 				<input id="ajouterphotop3" type="submit" value="ajouter une photo">
 				<p>page 333333333333</p>
@@ -93,192 +93,3 @@
 	</footer>
 	</body>
 	</html>
-
-	<!--
-
-
-//img 1 
-// const figure = document.createElement('figure');
-
-// const img = document.createElement('img');
-// img.src = 'assets/images/abajour-tahina.png';
-// img.alt = 'Abajour Tahina';
-
-// const figcaption = document.createElement('figcaption');
-// figcaption.textContent = 'Abajour Tahina';
-
-
-// // img 2
- 
-// const figure2 = document.createElement('figure');
-
-// const img2 = document.createElement('img');
-// img2.src = 'assets/images/appartement-paris-v.png';
-// img2.alt = 'appartement paris v';
-
-// const figcaption2 = document.createElement('figcaption');
-// figcaption2.textContent = 'appartement paris v';
-
-
-// //img 3 
- 
-// const figure3 = document.createElement('figure');
-
-// const img3 = document.createElement('img');
-// img3.src = 'assets/images/restaurant-sushisen-londres.png';
-// img3.alt = 'restaurant sushisen-londres ';
-
-// const figcaption3 = document.createElement('figcaption');
-// figcaption3.textContent = 'restaurant sushisen-londres';
-
-
-// //img 4   
- 
-// const figure4 = document.createElement('figure');
-
-// const img4 = document.createElement('img');
-// img4.src = 'assets/images/la-balisiere.png';
-// img4.alt = 'Villa"la Balisère" - Port-louis ';
-
-// const figcaption4 = document.createElement('figcaption');
-// figcaption4.textContent = ' Villa"Balisère" - Port-louis';
-
-
-
-// //img 5   
- 
-// const figure5 = document.createElement('figure');
-
-// const img5 = document.createElement('img');
-// img5.src = 'assets/images/structures-thermopolis.png';
-// img5.alt = 'Structures Thermopolis';
-
-// const figcaption5 = document.createElement('figcaption');
-// figcaption5.textContent = 'Structures Thermopolis';
-
-
-// //img 6   
- 
-// const figure6 = document.createElement('figure');
-
-// const img6 = document.createElement('img');
-// img6.src = 'assets/images/appartement-paris-x.png';
-// img6.alt = 'Appartement Paris X';
-
-// const figcaption6 = document.createElement('figcaption');
-// figcaption6.textContent = 'Appartement Paris X';
-
-// //img 7   
- 
-// const figure7 = document.createElement('figure');
-
-// const img7 = document.createElement('img');
-// img7.src = 'assets/images/le-coteau-cassis.png';
-// img7.alt = 'Pavillon “Le coteau” - Cassis';
-
-// const figcaption7 = document.createElement('figcaption');
-// figcaption7.textContent = 'Pavillon “Le coteau” - Cassis';
-
-
-// //img 8   
- 
-// const figure8 = document.createElement('figure');
-
-// const img8 = document.createElement('img');
-// img8.src = 'assets/images/villa-ferneze.png';
-// img8.alt = 'Villa Ferneze - Isola d’Elba';
-
-// const figcaption8 = document.createElement('figcaption');
-// figcaption8.textContent = 'Villa Ferneze - Isola d’Elba';
-
-// //img 9   
- 
-// const figure9 = document.createElement('figure');
-
-// const img9 = document.createElement('img');
-// img9.src = 'assets/images/appartement-paris-xviii.png';
-// img9.alt = 'Appartement Paris XVIII';
-
-// const figcaption9 = document.createElement('figcaption');
-// figcaption9.textContent = 'Appartement Paris XVIII';
-
-// //img 10   
- 
-// const figure10 = document.createElement('figure');
-
-// const img10 = document.createElement('img');
-// img10.src = 'assets/images/bar-lullaby-paris.png';
-// img10.alt = 'Bar “Lullaby” - Paris';
-
-// const figcaption10 = document.createElement('figcaption');
-// figcaption10.textContent = 'Bar “Lullaby” - Paris';
-
-
-// //img 11   
- 
-// const figure11 = document.createElement('figure');
-
-// const img11 = document.createElement('img');
-// img11.src = 'assets/images/hotel-first-arte-new-delhi.png';
-// img11.alt = 'Hotel First Arte - New Delhi';
-
-// const figcaption11 = document.createElement('figcaption');
-// figcaption11.textContent = 'Hotel First Arte - New Delhi';
-
-
-
-// // Construction de la figure
-// figure.appendChild(img);
-// figure.appendChild(figcaption); 
-
-
-// figure2.appendChild(img2);
-// figure2.appendChild(figcaption2 );
-
-// figure3.appendChild(img3);
-// figure3.appendChild(figcaption3 ); 
-
-
-// figure4.appendChild(img4);
-// figure4.appendChild(figcaption4); 
-
-
-// figure5.appendChild(img5);
-// figure5.appendChild(figcaption5); 
-
-// figure6.appendChild(img6);
-// figure6.appendChild(figcaption6);
-
-// figure7.appendChild(img7);
-// figure7.appendChild(figcaption7);
-
-
-// figure8.appendChild(img8);
-// figure8.appendChild(figcaption8);
-
-// figure9.appendChild(img9);
-// figure9.appendChild(figcaption9);
-
-// figure10.appendChild(img10);
-// figure10.appendChild(figcaption10);
-
-// figure11.appendChild(img11);
-// figure11.appendChild(figcaption11);
-
-
-
-// // Ajouter la figure à la div.gallery
-// galleryDiv.appendChild(figure);
-// galleryDiv.appendChild(figure2  );
-// galleryDiv.appendChild(figure3  );
-// galleryDiv.appendChild(figure4  );
-// galleryDiv.appendChild(figure5   );
-// galleryDiv.appendChild(figure6 );
-// galleryDiv.appendChild(figure7 );
-// galleryDiv.appendChild(figure8 );
-// galleryDiv.appendChild(figure9 );
-// galleryDiv.appendChild(figure10 );
-// galleryDiv.appendChild(figure11 );
-
-
--->

@@ -35,7 +35,7 @@
         const page3 = document.getElementById('modal-page3');
 
         document.getElementById('ajouterphoto').addEventListener('click', () => {
-         page1.style.display = 'none';  
+         page1.style.display = 'none';      
          page2.style.display = 'block'; 
         });
 
@@ -50,46 +50,84 @@
         //  // gestion des pohto de la modal importation des phtos 
 
 
-        // fetch('http://localhost:5678/api/works')
-        //     .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('Erreur HTTP ' + response.status);
-        //     }
-        //     return response.json(); // Convertir la réponse en JSON
-        //     })
-        //     .then(data => {
-        //     console.log(data); // Affiche les données reçues dans la console
+        fetch('http://localhost:5678/api/works')
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur HTTP ' + response.status);
+            }
+            return response.json(); // Convertir la réponse en JSON
+            })
+            .then(data => {
+            console.log(data); // Affiche les données reçues dans la console
 
-        //     // Cibler la section existante dans  HTML
-        //     const photomodalSection = document.getElementById('photomodal');
+            // Cibler la section existante dans  HTML
+            const photomodalSection = document.getElementById('photomodal');
 
-        //     //  Créer la div.gallery
-        //     const galleryDiv = document.createElement('div');
-        //     galleryDiv.classList.add('gallery');
+            //  Créer la div.gallery
+            const galleryDiv = document.createElement('div');
+            galleryDiv.classList.add('gallery');
 
-        //     // Parcourir chaque œuvre reçue
-        //     data.forEach(work => {
-        //         // Création de la figure
-        //         const figure = document.createElement('figure');
-        //         figure.setAttribute('data-category-id', work.category.id); // Important pour filtrer
+            // Parcourir chaque œuvre reçue
+            data.forEach(work => {
+                // Création de la figure
+                const figure = document.createElement('figure');
+                figure.setAttribute('data-category-id', work.category.id); // Important pour filtrer
 
-        //         const img = document.createElement('img');
-        //         img.src = work.imageUrl;
-        //         img.alt = work.title;
+                const img = document.createElement('img');
+                img.src = work.imageUrl;
+                img.alt = work.title;
 
-        //         const figcaption = document.createElement('figcaption');
-        //         figcaption.textContent = work.title;
+                const figcaption = document.createElement('figcaption');
+                figcaption.textContent = work.title;
 
-        //         // Ajouter image + légende dans figure
-        //         figure.appendChild(img);
-        //         figure.appendChild(figcaption);
+                // Ajouter image + légende dans figure
+                figure.appendChild(img);
+                figure.appendChild(figcaption);
 
-        //         // Ajouter la figure à la div.gallery
-        //         galleryDiv.appendChild(figure);
-        //     });
+                // Ajouter la figure à la div.gallery
+                galleryDiv.appendChild(figure);
+            });
 
-        //     //  Ajouter la div.gallery à la section portfolio
-        //     photomodalSection.appendChild(galleryDiv);
-        //     });
+            //  Ajouter la div.gallery à la section portfolio
+            photomodalSection.appendChild(galleryDiv);
+            });
+
+        // surpimer les Work
+        
+        fetch('http://localhost:5678/api/works' ,{
+            method: 'delete'
+            })
+            
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur HTTP ' + response.status);
+            }
+            console.log  ('works surpimer');
+            })
+            .catch(error  => {
+            console.error('ereure de supretion', error);         
+                }); 
+
+        // modal page 2  
+        const form = e.target; 
+        const formData =  new formData(form);
+        const formObject =  Object.fromEntries(formData.fromEntries());
+        try  {
+            const response = await  fetch('http://localhost:5678/api/works', {
+                methode: 'post',
+                headers: {'content-type': 'application-json' },
+                body: json.stringify(formObject) 
+                     }); 
+            if (!response.ok) {
+                throw new Error('Erruere' );
+                alert ('fromualire envoyer');
+                loadForm();
+            }
+
+            catch (error) => { 
+                alert ('un errore est survenue');
+            console.error(error);
+                }     
+            };          
 
             
