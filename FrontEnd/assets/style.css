@@ -320,3 +320,93 @@ pour redimentionner les photos  */
   display: block;
   margin: 0 auto;
 }
+
+/* 
+modal page 2  */
+.uplaod-section {
+	background-color: gray;
+	padding: 20px;
+	border-radius: 8px;
+	text-align: center;
+	margin-bottom: 20px;
+
+}
+.uplaod-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.uplaod-icon {
+	width: 40px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+
+.upload-button {
+  background-color: #e0e6ed;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #d0d8e0;
+}
+
+.file-info {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Partie formulaire */
+.form-section label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.form-section input,
+.form-section select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.validate-button {
+  width: 100%;
+  background-color: #c0c0c0;
+  border: none;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.validate-button:hover {
+  background-color: #a0a0a0;
+}
+.validate-button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.validate-button:enabled {
+  background-color: green;
+  cursor: pointer;
+  opacity: 1;
+}
+
+
