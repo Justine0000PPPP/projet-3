@@ -1,67 +1,73 @@
 let modal = null;  // variable globale pour la modal active
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  const isLoggedIn = token !== null;
 
+  const filtresSection = document.getElementById('filtres'); // ta section ou tes boutons filtres
+  const modifierBtn = document.getElementById('modifier-btn'); // bouton modifier déjà existant dans ton HTML
+
+  if (isLoggedIn) {
+    // connecté → cacher filtres, afficher modifier
+    if (filtresSection) filtresSection.style.display = 'none';
+    if (modifierBtn) modifierBtn.style.display = 'inline-block'; // ou 'flex' selon ton CSS
+  } else {
+    // pas connecté → afficher filtres, cacher modifier
+    if (filtresSection) filtresSection.style.display = 'flex'; // ou 'block' selon ton layout
+    if (modifierBtn) modifierBtn.style.display = 'none';
+  }
 const openmodal = function(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Vérifier la présence du token (indique si connecté)
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert("Vous devez être connecté pour ouvrir cette fenêtre.");
-        return;  // Bloque l'ouverture de la modal si pas connecté
-    }
+  // Récupérer la modal cible via data-target
+  const target = document.querySelector(e.currentTarget.getAttribute('data-target'));
 
-    // Récupérer la modal cible via l'attribut href du lien
-    const target = document.querySelector(e.target.getAttribute('href'));
-    if (!target) return; // sécurité si cible introuvable
+  if (!target) return; // sécurité si cible introuvable
 
-    target.style.display = "flex";
-    modal = target;
+  target.style.display = "flex";
+  modal = target;
 
-    // Fermer la modal si clic en dehors du contenu
-    modal.addEventListener('click', closemodal);
+  // Fermer la modal si clic en dehors du contenu
+  modal.addEventListener('click', closemodal);
 
-    // Charger les images dans la modal (fonction existante)
-    fetchimage();
+  // Appelle ta fonction pour charger les images (à garder si tu veux)
+  fetchimage();
 };
 
+// Fonction pour fermer la modal si clic en dehors du contenu
 const closemodal = function(e) {
-    if (e.target === modal) {
-        modal.style.display = "none";
-        modal = null;
-    }
+  if (e.target === modal) {
+    modal.style.display = "none";
+    modal = null;
+  }
 };
 
 // Ajout des écouteurs sur tous les liens qui ouvrent la modal
 document.querySelectorAll('.js-modal').forEach(link => {
-    link.addEventListener('click', openmodal);
+  link.addEventListener('click', openmodal);
 });
+
+
 
 // Gestion de l'apparition des pages dans la modal
 const page1 = document.getElementById('modal-page1');
 const page2 = document.getElementById('modal-page2');
-const page3 = document.getElementById('modal-page3');
+
 
 document.getElementById('ajouterphoto').addEventListener('click', () => {
     page1.style.display = 'none';      
     page2.style.display = 'block'; 
 });
 
-document.getElementById('ajouterphotop2').addEventListener('click', () => {
-    page2.style.display = 'none';  
-    page3.style.display = 'block'; 
-});
-
 // Retour dans la modal
-document.getElementById('retourp2').addEventListener('click', () => {
+document.getElementById('retourp2').addEventListener('click', () => { 
     page1.style.display = 'block';      
     page2.style.display = 'none'; 
+
 });
 
-document.getElementById('retourp3').addEventListener('click', () => {
-    page2.style.display = 'block';      
-    page3.style.display = 'none'; 
-});
 
+
+//  modal page 1
 
 // Fonction pour récupérer et afficher les images dans la modal
 function fetchimage() { 
@@ -81,7 +87,7 @@ function fetchimage() {
             photomodalSection.innerHTML = '';
 
             const galleryDivModal = document.createElement('div');
-            galleryDivModal.classList.add('gallery');
+            galleryDivModal.classList.add('gallery-modal');
 
             data.forEach(work => {
                 const figureModal = document.createElement('figure');
@@ -99,7 +105,7 @@ function fetchimage() {
                 deleteBtn.title = "Supprimer cette photo";
 
                 const trashIcon = document.createElement('img');
-                trashIcon.src = 'BacKend/images/yconepoubelle.png';  
+                trashIcon.src = 'BacKend/images/Backend/images/yconepoubelle.jpg';    
                 trashIcon.alt = 'Supprimer';
                 trashIcon.style.width = '20px';
                 trashIcon.style.height = '20px';
@@ -125,7 +131,7 @@ function fetchimage() {
 }
 
 // Fonction pour supprimer une image (requête DELETE)
-function deleteimage(id, figureElement) { 
+function deleteimage(id, figureElement) {  
     const token = localStorage.getItem('token'); // Nécessaire pour l'authentification
 
     if (!token) {
@@ -143,7 +149,7 @@ function deleteimage(id, figureElement) {
         if (!response.ok) {
             throw new Error('Erreur HTTP ' + response.status);
         }
-        console.log('Work supprimé');
+        // console.log('Work supprimé'); 
         figureElement.remove(); // Retire du DOM
     })      
     .catch(error => {
@@ -152,7 +158,7 @@ function deleteimage(id, figureElement) {
 }
 
 // modal page 2
-document.addEventListener('DOMContentLoaded', () => {
+
     const fileInput = document.getElementById('fileInput');
     const addPhotoBtn = document.getElementById('addphotobtn');
     const previewImage = document.getElementById('previewImage');
@@ -176,42 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
             previewImage.style.display = 'block';
         }
     });
-});
-const form = document.querySelector('.form-section');
-const page2 = document.getElementById('modal-page2');
-const page3 = document.getElementById('modal-page3');
 
-const previewFinalImage = document.getElementById('previewFinalImage');
-const finalTitre = document.getElementById('finalTitre');
-const finalCategorie = document.getElementById('finalCategorie');
-const backToPage2Btn = document.getElementById('backToPage2');
 
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
+});      
 
-  const file = fileInput.files[0];
-  const titre = titreInput.value.trim();
-  const categorie = categorieSelect.value;
 
-  if (!file || !titre || categorie === 'tous') {
-    alert("Merci de remplir tous les champs correctement.");
-    return;
-  }
 
-  // Injecter les infos dans les éléments de la page 3
-  previewFinalImage.src = URL.createObjectURL(file);
-  previewFinalImage.style.display = 'block';
-
-  finalTitre.textContent = titre;
-  finalCategorie.textContent = categorie;
-
-  // Afficher la page 3
-  page2.style.display = 'none';
-  page3.style.display = 'block';
-});
-
-// Retour à la page 2 depuis page 3
-backToPage2Btn.addEventListener('click', () => {
-  page3.style.display = 'none';
-  page2.style.display = 'block';
-});

@@ -40,15 +40,22 @@
 		<section id="filtres">
 				</section> 
 		<section id="portfolio">  
-			<h2>Mes Projets</h2>
+<div class="entete">
+  <h2>Mes Projets</h2>
+
+  <button class="js-modal modifier-btn" id="ouvremodal" data-target="#modal">
+    <img src="./assets/icons/pencil.png" alt="Modifier" class="icon-pencil" />
+    Modifier
+  </button>
+</div>
 				
 			
 			<!--<div class="gallery"> ajout js -->
 
 
 		</section>
-
-		<a href="#modal" class="js-modal">ouvrire la modal </a>
+ 
+		<a href="#modal" class="js-modal invisible-link">ouvrire la modal</a>
 		<aside id="modal" class="modal">
 			<div id="modal-page1" style="display: block;">
 				<h3 class="titre">galerie photo </h3> 
@@ -57,8 +64,7 @@
 
 				</section>
 				 
-				<button id="ajouterphoto">ajouter une photo</button>  			
-				<button id="retoure1">retoure</button>  			
+				<button id="ajouterphoto">ajouter une photo</button>  					
 			</div> 
 			
 			
@@ -97,16 +103,9 @@
 
 				<p>page 2222222222222222222</p> 
  
-				<button id="retourp2">retoure</button>
+				<button id="retourp2" class="modal-back">←</button>
 			</div>
-<div id="modal-page3" style="display: none;">
-  <h3 class="titre">Validation de la photo</h3>
-  <img id="previewFinalImage" style="max-width: 200px; display: none; margin-bottom: 10px;" alt="Prévisualisation finale" />
-  <p><strong>Titre :</strong> <span id="finalTitre"></span></p>
-  <p><strong>Catégorie :</strong> <span id="finalCategorie"></span></p>
-
-  <button id="backToPage2">Modifier</button>
-</div>
+			
 		</aside>
 
 		<section id="contact">

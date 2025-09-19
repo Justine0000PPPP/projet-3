@@ -42,32 +42,6 @@
     });
 
 
-    // géré les filtres
-const filtresSection = document.getElementById('filtres');  
-fetch('http://localhost:5678/api/categories')
-  .then(response => response.json())
-  .then(categories => {
-    categories.forEach(category => {
-      const button = document.createElement('button');
-      button.textContent = category.name;            
-      button.setAttribute('data-id', category.id);      
-    filtresSection.appendChild(button);                // Ajoute le bouton à la section filtres
-    button.setAttribute('data-id', category.id); // Stocke l'id de la catégorie dans un attribut data-id du bouton
-    button.addEventListener('click', () => {
-  // Ici tu mettras la fonction qui filtrera les images selon category.id
-  filterImagesByCategory(category.id);
-});
-});
-const btntous = document.createElement('button');
-    btntous.textContent = 'tous';
-    filtresSection.appendChild(btntous);   
-    btntous.addEventListener('click', () => {
-    filterImagesByCategory(0);
-        }); 
-
-     
-  });
-
   // Fonction pour filtrer les images selon l'id de catégorie  
 
 function filterImagesByCategory(categoryId) {
