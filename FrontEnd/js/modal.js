@@ -158,33 +158,57 @@ function deleteimage(id, figureElement) {
 }
 
 // modal page 2
+// Fonction pour envoyer les données à l'API
+function addWorks() {
+  const selectedFile = document.getElementById('fileInput').files[0];
+  const titreInput = document.getElementById('titre');
+  const categorieSelect = document.getElementById('categories');
+  const token = localStorage.getItem('token');
 
-    const fileInput = document.getElementById('fileInput');
-    const addPhotoBtn = document.getElementById('addphotobtn');
-    const previewImage = document.getElementById('previewImage');
+  if (!selectedFile || !titreInput.value.trim() || !categorieSelect.value) {
+    alert("Veuillez remplir tous les champs et sélectionner une image.");
+    return;
+  }
 
-    if (!fileInput || !addPhotoBtn || !previewImage) {
-        console.error("Certains éléments ne sont pas trouvés dans le DOM");
-        return;
+  const formData = new FormData();
+  formData.append("image", selectedFile);
+  formData.append("title", titreInput.value.trim());
+  formData.append("category", categorieSelect.value);
+
+  fetch("http://localhost:5678/api/works", {  // <-- URL de l'API à corriger ici
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+      // Ne PAS mettre Content-Type ici pour FormData !
+    },
+    body: formData,
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'ajout du work");
     }
+    return response.json();
+  })
+  .then(data => {
+    alert("Work ajouté avec succès !");
+    // Ici tu peux réinitialiser le formulaire ou mettre à jour la galerie
+  })
+  .catch(error => {
+    console.error(error);
+    alert("Une erreur est survenue lors de l'ajout.");
+  });
+}
 
-    // Quand on clique sur le bouton, on ouvre la fenêtre de sélection de fichier
-    addPhotoBtn.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    // Quand un fichier est sélectionné
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            previewImage.src = imageUrl;
-            previewImage.style.display = 'block';
-        }
-    });
-
-
+// Ajout de l'event listener sur le bouton Valider
+document.getElementById('validateBtn').addEventListener('click', (e) => {
+  e.preventDefault();  // Empêche la soumission classique du formulaire
+  addWorks();
+});
 });      
+
+
+
+
 
 
 
