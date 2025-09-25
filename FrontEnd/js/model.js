@@ -42,22 +42,61 @@
     });
 
 
-  // Fonction pour filtrer les images selon l'id de catégorie  
+// mise enplace des filtres 
+// apelle fetch pour les filtres 
 
-function filterImagesByCategory(categoryId) {
-  // Sélectionner toutes les figures (tes images dans la galerie)
-  const allFigures = document.querySelectorAll('.gallery figure');
-
-  allFigures.forEach(figure => {
-      const figureCategoryId = figure.getAttribute('data-category-id');
-
-    if (categoryId === 0 || figureCategoryId == categoryId) {
-      figure.style.display = 'block';  // Affiche la figure si la catégorie correspond ou si id = 0 (Tous)
-    } else {
-      figure.style.display = 'none';   // Cache la figure sinon
-    }   
-      });
+  function fetchCategories() {
+  fetch('http://localhost:5678/api/categories')
+    .then(response => {
+      if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
+      return response.json();
+    })
+    .then(categories => {
+      createCategoryButtons(categories);
+    })
+    .catch(error => {
+      console.error('Erreur lors du chargement des catégories:', error);
+    });
 }
-// oublie pas de recomprende tous le code plus maitre sur github 
 
- 
+// Mise enplace des bouttons
+function createCategoryButtons() {
+  const filtresSection = document.getElementById('filtres');
+  filtresSection.innerHTML = ''; // vide avant d'ajouter les boutons
+
+  // Bouton "Tous"
+  const btnAll = document.createElement('button');
+  btnAll.textContent = "Tous";
+  btnAll.dataset.categoryId = 0;
+  btnAll.addEventListener('click', () => {
+    fetchCategories();
+  });
+  filtresSection.appendChild(btnAll);
+
+  // Bouton "Objets"
+  const btnObjets = document.createElement('button');
+  btnObjets.textContent = "Objets";
+  btnObjets.dataset.categoryId = 1;  
+  btnObjets.addEventListener('click', () => {
+    fetchCategories();
+  });
+  filtresSection.appendChild(btnObjets);
+
+  // Bouton "Appartement"
+  const btnAppartement = document.createElement('button');
+  btnAppartement.textContent = "Appartement";
+  btnAppartement.dataset.categoryId = 2; 
+  btnAppartement.addEventListener('click', () => {
+    fetchCategories();
+  });
+  filtresSection.appendChild(btnAppartement);
+
+  // Bouton "Hotels restaurant"
+  const btnHotelsrestau = document.createElement('button');
+  btnHotelsrestau.textContent = "Hotels restaurant";
+  btnHotelsrestau.dataset.categoryId = 3; 
+   btnHotelsrestau.addEventListener('click', () => {
+    fetchCategories();
+  });
+  filtresSection.appendChild(btnHotelsrestau);
+}

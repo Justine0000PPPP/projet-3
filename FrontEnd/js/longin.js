@@ -48,3 +48,46 @@ login.addEventListener('submit', function(event) {
 });
 
 
+
+// pour ouvrire la modal que quand on est login 
+
+
+
+
+
+
+// Pour ouvrire la modal 
+  const openmodal = function(e) {
+  e.preventDefault();
+
+  // Récupérer la modal cible via data-target
+  const target = document.querySelector(e.currentTarget.getAttribute('data-target'));
+
+  if (!target) return; // sécurité si cible introuvable
+
+  target.style.display = "flex";
+  modal = target;
+
+  // Fermer la modal si clic en dehors du contenu
+  modal.addEventListener('click', closemodal);
+
+  // Appelle ta fonction pour charger les images (à garder si tu veux)
+  fetchimage();
+};
+
+// Fonction pour fermer la modal si clic en dehors du contenu
+const closemodal = function(e) {
+  if (e.target === modal) {
+    modal.style.display = "none";
+    modal = null;
+  }
+};
+
+
+
+
+function logout() {
+  localStorage.removeItem('token');  // Supprime le token
+  window.location.href = indexp3.html 
+}
+document.getElementById('logout').addEventListener('click', logout); 
