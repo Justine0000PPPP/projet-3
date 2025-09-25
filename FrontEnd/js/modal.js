@@ -1,21 +1,8 @@
 let modal = null;  // variable globale pour la modal active
 document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('token');
-  const isLoggedIn = token !== null;
 
-  const filtresSection = document.getElementById('filtres'); // ta section ou tes boutons filtres
-  const modifierBtn = document.getElementById('modifier-btn'); // bouton modifier déjà existant dans ton HTML
-
-  if (isLoggedIn) {
-    // connecté → cacher filtres, afficher modifier
-    if (filtresSection) filtresSection.style.display = 'none';
-    if (modifierBtn) modifierBtn.style.display = 'inline-block'; // ou 'flex' selon ton CSS
-  } else {
-    // pas connecté → afficher filtres, cacher modifier
-    if (filtresSection) filtresSection.style.display = 'flex'; // ou 'block' selon ton layout
-    if (modifierBtn) modifierBtn.style.display = 'none';
-  }
-const openmodal = function(e) {
+// Pour ouvrire la modal 
+  const openmodal = function(e) {
   e.preventDefault();
 
   // Récupérer la modal cible via data-target
@@ -40,6 +27,8 @@ const closemodal = function(e) {
     modal = null;
   }
 };
+
+
 
 // Ajout des écouteurs sur tous les liens qui ouvrent la modal
 document.querySelectorAll('.js-modal').forEach(link => {
@@ -129,6 +118,8 @@ function fetchimage() {
             console.error('Erreur lors de la récupération des images:', error);
         });
 }
+
+
 
 // Fonction pour supprimer une image (requête DELETE)
 function deleteimage(id, figureElement) {  

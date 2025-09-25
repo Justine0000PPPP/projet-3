@@ -1,3 +1,4 @@
+function loginbtn() { 
 let login = document.getElementById('loginform');
 login.addEventListener('submit', function(event) {
   event.preventDefault();  
@@ -45,49 +46,57 @@ login.addEventListener('submit', function(event) {
       alert(error.message); 
     }
   });
-});
+}); }
+
+
+// Cibler le bouton logout
+function logoutBtn() {
+const logoutBtn = document.getElementById('logout');
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    // Supprimer le token
+    localStorage.removeItem('token');
+
+  });
+ }}
 
 
 
-// pour ouvrire la modal que quand on est login 
 
 
 
 
 
 
-// Pour ouvrire la modal 
-  const openmodal = function(e) {
-  e.preventDefault();
+ document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  const Login = document.getElementById('login');
+  const Logout = document.getElementById('logout');
+  const barelogin = document.getElementById('barelogin');
 
-  // Récupérer la modal cible via data-target
-  const target = document.querySelector(e.currentTarget.getAttribute('data-target'));
-
-  if (!target) return; // sécurité si cible introuvable
-
-  target.style.display = "flex";
-  modal = target;
-
-  // Fermer la modal si clic en dehors du contenu
-  modal.addEventListener('click', closemodal);
-
-  // Appelle ta fonction pour charger les images (à garder si tu veux)
-  fetchimage();
-};
-
-// Fonction pour fermer la modal si clic en dehors du contenu
-const closemodal = function(e) {
-  if (e.target === modal) {
-    modal.style.display = "none";
-    modal = null;
+  if (token) {
+    // Utilisateur connecté : afficher logout, cacher login
+    Login.style.display = 'none';
+    Logout.style.display = 'block';
+    barelogin.style.display = 'block';
+  } else {
+    // Pas connecté : afficher login, cacher logout
+    Login.style.display = 'block';
+    Logout.style.display = 'none';
+      barelogin.style.display = 'none';
   }
-};
+
+  // Gestion du clic sur logout
+  if (logout) {
+    logout.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      // rafraîchir la page pour mettre à jour l'affichage
+      window.location.reload();
+    });
+  }
+
+   }
+);
 
 
-
-
-function logout() {
-  localStorage.removeItem('token');  // Supprime le token
-  window.location.href = indexp3.html 
-}
-document.getElementById('logout').addEventListener('click', logout); 

@@ -536,6 +536,50 @@ modal page 2  */
   z-index: 10;
 }
 
+#logout {
+	display: none;
+}
 
 
+#barelogin {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;      /* centre verticalement */
+  justify-content: flex-start;  /* aligne à gauche */
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 9999;
+  height: 50px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  gap: 10px;
+}
 
+/* .baretxt peut servir d'espacement ou autre */
+.baretxt {
+  width: 20px; /* exemple d'espace à gauche, adapte la largeur */
+  height: 100%;
+ margin-left: 20px;
+}
+
+/* Image */
+#barelogin img {
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Paragraphe */
+#barelogin p {
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}

@@ -1,5 +1,6 @@
-
-    fetch('http://localhost:5678/api/works')
+// pour genérer les images et leur texste
+  
+       fetch('http://localhost:5678/api/works')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erreur HTTP ' + response.status);
@@ -39,7 +40,7 @@
 
       //  Ajouter la div.gallery à la section portfolio
       portfolioSection.appendChild(galleryDiv);
-    });
+    }); 
 
 
 // mise enplace des filtres 
