@@ -60,44 +60,72 @@
     });
 }
 
-// Mise enplace des bouttons
-function createCategoryButtons() {
+  // Mise enplace des bouttons
+
+  // function createCategoryButtons() {
+  //   const filtresSection = document.getElementById('filtres');
+  //   filtresSection.innerHTML = ''; // vide avant d'ajouter les boutons
+
+  //   // Bouton "Tous"
+  //   const btnAll = document.createElement('button');
+  //   btnAll.textContent = "Tous";
+  //   btnAll.dataset.categoryId = 0;
+  //   btnAll.addEventListener('click', () => {
+  //     fetchCategories();
+  //   });
+  //   filtresSection.appendChild(btnAll);
+
+  //   // Bouton "Objets"
+  //   const btnObjets = document.createElement('button');
+  //   btnObjets.textContent = "Objets";
+  //   btnObjets.dataset.categoryId = 1;  
+  //   btnObjets.addEventListener('click', () => {
+  //     fetchCategories();
+  //   });
+  //   filtresSection.appendChild(btnObjets);
+
+  //   // Bouton "Appartement"
+  //   const btnAppartement = document.createElement('button');
+  //   btnAppartement.textContent = "Appartement";
+  //   btnAppartement.dataset.categoryId = 2; 
+  //   btnAppartement.addEventListener('click', () => {
+  //     fetchCategories();
+  //   });
+  //   filtresSection.appendChild(btnAppartement);
+
+  //   // Bouton "Hotels restaurant"
+  //   const btnHotelsrestau = document.createElement('button');
+  //   btnHotelsrestau.textContent = "Hotels restaurant";
+  //   btnHotelsrestau.dataset.categoryId = 3; 
+  //   btnHotelsrestau.addEventListener('click', () => {
+  //     fetchCategories();
+  //   });
+  //   filtresSection.appendChild(btnHotelsrestau);
+  // }
+
+
+function createCategoryButtons(categories) {
   const filtresSection = document.getElementById('filtres');
-  filtresSection.innerHTML = ''; // vide avant d'ajouter les boutons
 
-  // Bouton "Tous"
-  const btnAll = document.createElement('button');
-  btnAll.textContent = "Tous";
-  btnAll.dataset.categoryId = 0;
-  btnAll.addEventListener('click', () => {
-    fetchCategories();
+  // Supprimer tous les anciens boutons sauf le bouton "Tous"
+  const boutons = filtresSection.querySelectorAll('button');
+  boutons.forEach(btn => {
+    if (btn.id !== 'btn-tous') {
+      btn.remove();
+    }
   });
-  filtresSection.appendChild(btnAll);
 
-  // Bouton "Objets"
-  const btnObjets = document.createElement('button');
-  btnObjets.textContent = "Objets";
-  btnObjets.dataset.categoryId = 1;  
-  btnObjets.addEventListener('click', () => {
-    fetchCategories();
-  });
-  filtresSection.appendChild(btnObjets);
+  // Ajouter les boutons à partir des catégories récupérées
+  categories.forEach(category => {
+    const btn = document.createElement('button');
+    btn.textContent = category.name;
+    btn.dataset.categoryId = category.id;
 
-  // Bouton "Appartement"
-  const btnAppartement = document.createElement('button');
-  btnAppartement.textContent = "Appartement";
-  btnAppartement.dataset.categoryId = 2; 
-  btnAppartement.addEventListener('click', () => {
-    fetchCategories();
-  });
-  filtresSection.appendChild(btnAppartement);
+    btn.addEventListener('click', () => {
+      fetchCategories()
+    });
 
-  // Bouton "Hotels restaurant"
-  const btnHotelsrestau = document.createElement('button');
-  btnHotelsrestau.textContent = "Hotels restaurant";
-  btnHotelsrestau.dataset.categoryId = 3; 
-   btnHotelsrestau.addEventListener('click', () => {
-    fetchCategories();
+    filtresSection.appendChild(btn);
   });
-  filtresSection.appendChild(btnHotelsrestau);
 }
+

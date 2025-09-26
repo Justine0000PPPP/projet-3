@@ -1,3 +1,5 @@
+
+ document.addEventListener('DOMContentLoaded', () => {
 function loginbtn() { 
 let login = document.getElementById('loginform');
 login.addEventListener('submit', function(event) {
@@ -33,8 +35,8 @@ login.addEventListener('submit', function(event) {
     // Enregistrer le token dans le localStorage
     localStorage.setItem('token', data.token);
 
-    // Rediriger vers index.html
-    window.location.href = 'index.html';
+    // Rediriger vers index.html  
+    window.location.href = 'index.html';  
     })
   .catch(error => {
     //  Affichage du message d'erreur dans la page
@@ -64,39 +66,36 @@ if (logoutBtn) {
 
 
 
+const token = localStorage.getItem('token');
 
-
-
-
-
- document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('token');
-  const Login = document.getElementById('login');
-  const Logout = document.getElementById('logout');
+  const loginBtn = document.getElementById('login');
+  const logoutBtn = document.getElementById('logout');
   const barelogin = document.getElementById('barelogin');
+  const filtres = document.getElementById('filtres');
+  const ouvremodal = document.getElementById('ouvremodal');
 
   if (token) {
-    // Utilisateur connecté : afficher logout, cacher login
-    Login.style.display = 'none';
-    Logout.style.display = 'block';
+    // Utilisateur connecté
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
     barelogin.style.display = 'block';
+    filtres.style.display = 'none';  // cacher les filtres quand connecté
+    ouvremodal.style.display = 'block';
   } else {
-    // Pas connecté : afficher login, cacher logout
-    Login.style.display = 'block';
-    Logout.style.display = 'none';
-      barelogin.style.display = 'none';
+    // Utilisateur déconnecté
+    loginBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    barelogin.style.display = 'none';
+    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
+  ouvremodal.style.display = 'none';
   }
 
   // Gestion du clic sur logout
-  if (logout) {
-    logout.addEventListener('click', () => {
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
       localStorage.removeItem('token');
-      // rafraîchir la page pour mettre à jour l'affichage
-      window.location.reload();
+      window.location.reload(); // rafraîchir la page après déconnexion
     });
   }
-
-   }
-);
-
+});
 
