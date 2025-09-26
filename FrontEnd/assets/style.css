@@ -536,9 +536,6 @@ modal page 2  */
   z-index: 10;
 }
 
-#logout {
-	display: none;
-}
 
 
 #barelogin {
@@ -565,7 +562,7 @@ modal page 2  */
 .baretxt {
   width: 20px; /* exemple d'espace à gauche, adapte la largeur */
   height: 100%;
- margin-left: 20px;
+ margin-left: 20px	;
 }
 
 /* Image */
@@ -582,4 +579,48 @@ modal page 2  */
   white-space: nowrap;
   display: flex;
   align-items: center;
+}
+/* 
+modal page 2 retour  */
+
+
+.upload-box {
+  position: relative;
+  width: 300px;       /* à adapter selon ta taille souhaitée */
+  height: 200px;      /* idem */
+  overflow: hidden;
+   margin: 0 auto;
+  /* Ou si la modal utilise flex, ajouter */
+  align-self: center;
+}
+
+.upload-box img#previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Bouton positionné au centre sur l'image */
+.upload-box button#addphotobtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+/* Cacher le bouton quand la classe "has-image" est ajoutée à upload-box */
+.upload-box.has-image button#addphotobtn {
+  opacity: 0;
+  pointer-events: none; /* pour ne plus pouvoir cliquer dessus */
+}
+#fileInput {
+  display: none;
 }

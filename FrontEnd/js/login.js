@@ -49,10 +49,11 @@ login.addEventListener('submit', function(event) {
     }
   });
 }); }
+loginbtn()
 
 
 // Cibler le bouton logout
-function logoutBtn() {
+function logout() {
 const logoutBtn = document.getElementById('logout');
 
 if (logoutBtn) {
@@ -89,13 +90,6 @@ const token = localStorage.getItem('token');
     filtres.style.display = 'block'; // afficher les filtres quand déconnecté
   ouvremodal.style.display = 'none';
   }
-
-  // Gestion du clic sur logout
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('token');
-      window.location.reload(); // rafraîchir la page après déconnexion
+logout()
     });
-  }
-});
-
+  

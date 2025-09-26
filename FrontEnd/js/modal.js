@@ -149,57 +149,60 @@ function deleteimage(id, figureElement) {
 }
 
 // modal page 2
-// Fonction pour envoyer les données à l'API
-function addWorks() {
-  const selectedFile = document.getElementById('fileInput').files[0];
-  const titreInput = document.getElementById('titre');
-  const categorieSelect = document.getElementById('categories');
-  const token = localStorage.getItem('token');
+const fileInput = document.getElementById('fileInput');
+const addPhotoBtn = document.getElementById('addphotobtn');
+const previewImage = document.getElementById('previewImage');
 
-  if (!selectedFile || !titreInput.value.trim() || !categorieSelect.value) {
-    alert("Veuillez remplir tous les champs et sélectionner une image.");
+addPhotoBtn.addEventListener('click', () => {
+  fileInput.click();  // ouvre la boîte de dialogue fichier
+});
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (!file) return; // pas de fichier sélectionné
+
+  // Vérification du type MIME (jpg/jpeg/png)
+  if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+    alert("Format non supporté. Veuillez sélectionner un fichier JPG ou PNG.");
+    fileInput.value = "";  // reset input
     return;
   }
 
-  const formData = new FormData();
-  formData.append("image", selectedFile);
-  formData.append("title", titreInput.value.trim());
-  formData.append("category", categorieSelect.value);
+  // Vérification taille max 4 Mo (4 * 1024 * 1024 octets)
+  if (file.size > 4 * 1024 * 1024) {
+    alert("Le fichier est trop lourd. La taille maximale est 4 Mo.");
+    fileInput.value = "";  // reset input
+    return;
+  }
 
-  fetch("http://localhost:5678/api/works", {  // <-- URL de l'API à corriger ici
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-      // Ne PAS mettre Content-Type ici pour FormData !
-    },
-    body: formData,
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Erreur lors de l'ajout du work");
-    }
-    return response.json();
-  })
-  .then(data => {
-    alert("Work ajouté avec succès !");
-    // Ici tu peux réinitialiser le formulaire ou mettre à jour la galerie
-  })
-  .catch(error => {
-    console.error(error);
-    alert("Une erreur est survenue lors de l'ajout.");
-  });
-}
+  // Afficher l'aperçu dans l'image
+  const reader = new FileReader();
+  reader.onload = e => {
+    previewImage.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 
-// Ajout de l'event listener sur le bouton Valider
-document.getElementById('validateBtn').addEventListener('click', (e) => {
-  e.preventDefault();  // Empêche la soumission classique du formulaire
-  addWorks();
+  
+  const addPhotoBtn = document.getElementById('addphotobtn');
+const fileInput = document.getElementById('fileInput');
+
+addPhotoBtn.addEventListener('click', () => {
+  fileInput.click();  // ouvre la fenêtre de sélection des fichiers
 });
-});      
+
+  }
+);
+
+} )
 
 
 
-
-
+// etape pour fais la page modal 3
+// avoir de quoi chercher limage en local via apis sur le boutton plus ajouter avec une taille et un format definie 
+// les deux xhamps
+// un pour le tire un champ basique 
+// un deuxieme avec les categorie apeller par la funtion deja faite 
+// puis lier le boutton viider a la futnion content laip de  addxorks 
+// pour ensuite que sa ajout a la page principal 
 
 

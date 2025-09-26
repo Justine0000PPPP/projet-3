@@ -9,14 +9,17 @@
 		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 		<meta name="description" content="">
 		<link rel="stylesheet" href="./assets/style.css">
-		<script src="js/model.js" defer></script>
+		<script src="js/index.js" defer></script>
 		<script src="js/modal.js" defer></script>
-		<script src="js/longin.js" defer></script>
+		<script src="js/login.js" defer></script> 
 	</head> 
 	<body>
 		<div id="barelogin">
+			<div class="baretxt"></div>
 			<img src="./assets/icons/instagram.png" alt="Instagram">
 			<p>Mode édition</p>
+		</div>
+
 		</div>
 			<header>
 				<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -24,8 +27,8 @@
 					<ul>
 						<li>projets</li>
 						<li>contact</li>
-						<li id="login"><a href="indexp3.html">login</a></li>
-						<li id="logout">logout </li> 
+						<li id="login"><a href="login.html">login</a></li>
+						<li><button id="logout">logout</button> </li>  
 						<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 					</ul>
 				</nav>
@@ -42,12 +45,13 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 			</article>
 		</section> 
-		<section id="filtres">
+		<section id="filtres"> 
+			
 				</section> 
 		<section id="portfolio">  
 <div class="entete">
   <h2>Mes Projets</h2>
-
+ 
   <button class="js-modal modifier-btn" id="ouvremodal" data-target="#modal">
     <img src="./assets/icons/pencil.png" alt="Modifier" class="icon-pencil" />
     Modifier
@@ -60,6 +64,10 @@
 
 		</section>
  
+
+
+
+
 		<a href="#modal" class="js-modal invisible-link">ouvrire la modal</a>
 		<aside id="modal" class="modal">
 			<div id="modal-page1" style="display: block;">
@@ -85,7 +93,7 @@
 <button class="upload-button" type="button" id="addphotobtn">Plus ajout photos</button>
 
 <!-- Image prévisualisation -->
-<img id="previewImage" src="" alt="Image à télécharger" >
+<img id="previewImage" src="./assets/images/sophie-bluel.png" alt="Image à télécharger" >
 
 	 
 	  <p class="file-info">Mettre la taille de l'image max</p>
