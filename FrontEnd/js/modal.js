@@ -182,7 +182,7 @@ fileInput.addEventListener('change', () => {
   };
   reader.readAsDataURL(file);
 
-  
+  // pour cahcer le input
   const addPhotoBtn = document.getElementById('addphotobtn');
 const fileInput = document.getElementById('fileInput');
 

@@ -2,7 +2,7 @@
  document.addEventListener('DOMContentLoaded', () => {
 function loginbtn() { 
 let login = document.getElementById('loginform');
-login.addEventListener('submit', function(event) {
+login.addEventListener('submit', async(event) => {
   event.preventDefault();  
   //  Récupération des valeurs des champs
     const email = document.getElementById('email').value;  
@@ -52,17 +52,22 @@ login.addEventListener('submit', function(event) {
 loginbtn()
 
 
-// Cibler le bouton logout
-function logout() {
+// Cibler le bouton logout 
+// function logout() {
 const logoutBtn = document.getElementById('logout');
 
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', () => {
+ 
+  logoutBtn.addEventListener('click', async() => {
     // Supprimer le token
     localStorage.removeItem('token');
+     loginBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    barelogin.style.display = 'none';
+    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
+  ouvremodal.style.display = 'none';
 
   });
- }}
+//  }
 
 
 
@@ -70,7 +75,6 @@ if (logoutBtn) {
 const token = localStorage.getItem('token');
 
   const loginBtn = document.getElementById('login');
-  const logoutBtn = document.getElementById('logout');
   const barelogin = document.getElementById('barelogin');
   const filtres = document.getElementById('filtres');
   const ouvremodal = document.getElementById('ouvremodal');

@@ -24,9 +24,10 @@ fetch('http://localhost:5678/api/works')
       figure.appendChild(figcaption);
 
       galleryDiv.appendChild(figure);
+          portfolioSection.appendChild(galleryDiv);
+
     });
 
-    portfolioSection.appendChild(galleryDiv);
   })
   .catch(console.error);
 
