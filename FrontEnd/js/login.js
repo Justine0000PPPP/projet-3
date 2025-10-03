@@ -1,5 +1,5 @@
 
- document.addEventListener('DOMContentLoaded', () => {
+//  document.addEventListener('DOMContentLoaded', () => {
 function loginbtn() { 
 let login = document.getElementById('loginform');
 login.addEventListener('submit', async(event) => {
@@ -95,5 +95,5 @@ const token = localStorage.getItem('token');
   ouvremodal.style.display = 'none';
   }
 logout()
-    });
+    // });
   
