@@ -176,6 +176,50 @@ document.getElementById('retourp2').addEventListener('click', () => {
     page2.style.display = 'none'; 
 
 });
+// /: parite loguot
+
+// Cibler le bouton logout 
+// function logout() {
+const logoutBtn = document.getElementById('logout');
+
+ 
+  logoutBtn.addEventListener('click', async() => {
+    // Supprimer le token
+    localStorage.removeItem('token');
+     loginBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    barelogin.style.display = 'none';
+    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
+  ouvremodal.style.display = 'none';
+
+  });
+
+
+const token = localStorage.getItem('token');
+
+  const loginBtn = document.getElementById('login');
+  const barelogin = document.getElementById('barelogin');
+  const filtres = document.getElementById('filtres');
+  const ouvremodal = document.getElementById('ouvremodal');
+
+  if (token) {
+    // Utilisateur connecté
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+    barelogin.style.display = 'block';
+    filtres.style.display = 'none';  // cacher les filtres quand connecté
+    ouvremodal.style.display = 'block';
+  } else {
+    // Utilisateur déconnecté
+    loginBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    barelogin.style.display = 'none';
+    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
+  ouvremodal.style.display = 'none';
+  }
+logout()
+
+  
 
 
 
@@ -272,6 +316,7 @@ function deleteimage(id, figureElement) {
 }
 
 // modal page 2
+function page2() {
 const fileInput = document.getElementById('fileInput');
 const addPhotoBtn = document.getElementById('addphotobtn');
 const previewImage = document.getElementById('previewImage');
@@ -306,48 +351,34 @@ fileInput.addEventListener('change', () => {
   reader.readAsDataURL(file);
 
   // pour cahcer le input
-  const addPhotoBtn = document.getElementById('addphotobtn');
-const fileInput = document.getElementById('fileInput');
-
 addPhotoBtn.addEventListener('click', () => {
   fileInput.click();  // ouvre la fenêtre de sélection des fichiers
 });
 
   }
-  );const selectElement = document.getElementById('categories');
+  );
+  const selectElement = document.getElementById('categories');
 
   selectElement.addEventListener('click', fetchCategories);
   selectElement.addEventListener('focus', fetchCategories);
 
-  } )
+  }} )
+// il manque un bout la 
 
-
-// ajout pour la validation a verifier 
-
-const fileInput = document.getElementById('fileInput');
-const titleInput = document.getElementById('titleInput'); // Assure-toi que c'est bien l'id de ton input titre
-const selectCategory = document.getElementById('categories');
-const submitBtn = document.getElementById('validateBtn');
-
-submitBtn.disabled = true; // bouton désactivé au départ
-
-function checkFormValidity() {
-  const fileSelected = fileInput.files.length > 0;
-  const titleFilled = titleInput.value.trim() !== '';
-  const categorySelected = selectCategory.value !== '' && selectCategory.value !== 'all';
-
-  if (fileSelected && titleFilled && categorySelected) {
-    submitBtn.disabled = false;
-  } else {
-    submitBtn.disabled = true;
-  }
-}
-
-// Écouteurs sur tous les champs pour vérifier à chaque changement
-fileInput.addEventListener('change', checkFormValidity);
-titleInput.addEventListener('input', checkFormValidity);
-selectCategory.addEventListener('change', checkFormValidity);
-
+  document.getElementById('monBouton').addEventListener('click', () => {
+  fetch('https://exemple.com/api/endpoint', {
+    method: 'POST'
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Réponse API:', data);
+    alert('work ajouter !');
+  })
+  .catch(error => {
+    console.error('Erreur API:', error);
+    alert('Erreur lors de l\'appel API');
+  });
+});
 
 
 

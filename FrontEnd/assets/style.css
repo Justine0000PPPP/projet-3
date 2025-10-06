@@ -187,7 +187,7 @@
 	}
 
 /*parti rajouter pour ex */
-#filtres {
+#filtres { 
   display: flex;
   justify-content: center;  
   gap: 12px;               
@@ -302,11 +302,11 @@
     display: inline-block;
 }
 
-/* Au hover, tu peux changer la couleur si tu veux (optionnel) */
-.modifier-btn:hover {
-    color: darkred;
+.entete {
+  display: flex;
+  align-items: center; /* Aligne verticalement sur la même ligne */
+  gap: 20px; /* Espace entre le titre et le bouton */
 }
-
 
 
 .invisible-link {
@@ -623,4 +623,22 @@ modal page 2 retour  */
 }
 #fileInput {
   display: none;
+}
+
+#barelogin {
+  display: flex;
+  justify-content: center;  /* Centre horizontalement */
+  align-items: center;      /* Aligne verticalement */
+  gap: 10px;                /* Espace entre l'image et le texte */
+  background-color: black;  /* Facultatif : pour voir le texte blanc */
+  padding: 10px;            /* Optionnel : pour un peu d'air autour */
+}
+
+#barelogin p {
+  color: white;             /* Texte blanc */
+  margin: 0;                /* Enlève la marge par défaut */
+}
+
+#barelogin img {
+  height: 20px;             /* Ajuste selon tes besoins */
 }
