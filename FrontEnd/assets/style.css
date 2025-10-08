@@ -186,7 +186,9 @@
 		margin: 2em
 	}
 
-/*parti rajouter pour ex */
+
+
+	/*parti rajouter pour ex */
 #filtres { 
   display: flex;
   justify-content: center;  
@@ -265,105 +267,88 @@
 	/* style des modals */
 
 
-
-	/* 
-	pour que je repaire  le bouton pour linstent sera enlever apres */
 .entete {
-    display: flex;
-    justify-content: flex-start; /* tout collé à gauche */
-    align-items: center;
-    margin-bottom: 1em;
-    gap: 12px; /* ajoute un écart fixe entre h2 et bouton */
-	display: flex;
-    justify-content: center; /* centre tout le groupe horizontalement */
-    align-items: center;     /* aligne verticalement au centre */
-    margin-bottom: 1em;
-    gap: 12px;         
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
 .modifier-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;                      /* espace entre icône et texte */
-    background: none;
-    border: none;
-    color: rgb(13, 12, 12);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
-    font-family: 'Work Sans', sans-serif;
-    text-transform: none;          /* garder normal, pas de majuscule */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: rgb(13, 12, 12);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Work Sans', sans-serif;
+  text-transform: none;
 }
 
 .modifier-btn .icon-pencil {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }
-
-.entete {
-  display: flex;
-  align-items: center; /* Aligne verticalement sur la même ligne */
-  gap: 20px; /* Espace entre le titre et le bouton */
-}
-
 
 .invisible-link {
-    display: none;
+  display: none;
 }
 
-		/* style des modals */
-	.gallery figure {
-	position: relative;
-	}
+.gallery figure {
+  position: relative;
+}
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(161, 155, 155, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
-	.modal {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background-color: rgba(161, 155, 155, 0.6);
-		display: none; 
-		align-items: center;
-		justify-content: center;
-		
-		}
+#modal-page1, #modal-page2, #modal-page3 {
+  text-align: center;
+  overflow: auto;
+  width: 800px;
+  height: 500px;
+  padding: 20px;
+  margin: auto;
+  background-color: rgb(201, 219, 219);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+#modal-page2 {
+  position: relative;
+}
 
-	#modal-page1, #modal-page2, #modal-page3 {
-	text-align: center;
-	overflow: auto;
-	width: 800px;       
-	height: 500px;     
-	padding: 20px;     
-	margin: auto;       
-	background-color: rgb(201, 219, 219);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	}
-	.titre {
-	background-color: white;         /* fond blanc */
-	color: #555555;                  /* gris moyen */
-	font-weight: 600;                /* semi-bold, un peu épais */
-	font-size: 2rem;                 /* taille plus grande (ajuste selon besoin) */
-	padding: 10px 20px;              /* espace intérieur */
-	border: 2px solid #ccc;          /* cadre gris clair */
-	border-radius: 6px;              /* coins légèrement arrondis */
-	max-width: fit-content;          /* largeur adaptée au contenu */
-	margin: 0 auto 20px auto;        /* centrer horizontalement, marge en bas */
-	text-align: center;
-	user-select: none;               /* optionnel: empêcher la sélection */
-	}
+.titre {
+  background-color: white;
+  color: #555555;
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  max-width: fit-content;
+  margin: 0 auto 20px auto;
+  text-align: center;
+  user-select: none;
+}
 
-
-	/* 
-	pour redimentionner les photos  */
-	.gallery-modal {
+.gallery-modal {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -388,76 +373,60 @@
   object-fit: contain;
 }
 
+#ajouterphoto {
+  background-color: #448353;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: auto;
+  align-self: center;
+}
 
+#ajouterphoto:hover {
+  background-color: #218838;
+}
 
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  z-index: 10;
+}
 
-	/* Bouton "Ajouter une photo" stylisé */
-	#ajouterphoto {
-	background-color: #448353; /* vert */
-	color: white;              /* texte blanc */
-	border: none;
-	padding: 12px 20px;
-	border-radius: 8px;
-	font-size: 16px;
-	font-weight: bold;
-	cursor: pointer;
-	margin-top: auto;          /* pousse le bouton en bas si parent en colonne */
-	align-self: center;        /* centre horizontalement */
-	}
-
-	#ajouterphoto:hover {
-	background-color: #218838; /* vert foncé au survol */
-	}
-
-
-	.delete-btn {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	background: transparent;
-	border: none;
-	cursor: pointer;
-	padding: 0;
-	outline: none;
-	z-index: 10; /* pour être sûr qu’il soit au-dessus */
-	}
-
-	.delete-btn img {
-	width: 20px;
-	height: 20px;
-	}
-
-
-
-
-/* 
-modal page 2  */
-#modal-page2 {
-  position: relative;
-}	
+.delete-btn img {
+  width: 20px;
+  height: 20px;
+}
 
 .uplaod-section {
-	background-color: gray;
-	padding: 20px;
-	border-radius: 8px;
-	text-align: center;
-	margin-bottom: 20px;
-
+  background-color: gray;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-.uplaod-box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 
+.uplaod-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .uplaod-icon {
-	width: 40px;
-	height: 40px;
-	margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
 }
-
 
 .upload-button {
   background-color: #e0e6ed;
@@ -479,7 +448,6 @@ modal page 2  */
   margin-top: 5px;
 }
 
-/* Partie formulaire */
 .form-section label {
   display: block;
   margin-top: 10px;
@@ -510,6 +478,7 @@ modal page 2  */
 .validate-button:hover {
   background-color: #a0a0a0;
 }
+
 .validate-button:disabled {
   background-color: grey;
   cursor: not-allowed;
@@ -522,7 +491,6 @@ modal page 2  */
   opacity: 1;
 }
 
-/* Bouton retour (flèche en haut à gauche) */
 .modal-back {
   position: absolute;
   top: 20px;
@@ -536,8 +504,6 @@ modal page 2  */
   z-index: 10;
 }
 
-
-
 #barelogin {
   display: none;
   position: fixed;
@@ -547,8 +513,8 @@ modal page 2  */
   background-color: black;
   color: white;
   display: flex;
-  align-items: center;      /* centre verticalement */
-  justify-content: flex-start;  /* aligne à gauche */
+  align-items: center;
+  justify-content: flex-start;
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 9999;
@@ -558,21 +524,18 @@ modal page 2  */
   gap: 10px;
 }
 
-/* .baretxt peut servir d'espacement ou autre */
 .baretxt {
-  width: 20px; /* exemple d'espace à gauche, adapte la largeur */
+  width: 20px;
   height: 100%;
- margin-left: 20px	;
+  margin-left: 20px;
 }
 
-/* Image */
 #barelogin img {
   height: 24px;
   object-fit: contain;
   display: block;
 }
 
-/* Paragraphe */
 #barelogin p {
   margin: 0;
   line-height: 1;
@@ -580,17 +543,13 @@ modal page 2  */
   display: flex;
   align-items: center;
 }
-/* 
-modal page 2 retour  */
-
 
 .upload-box {
   position: relative;
-  width: 300px;       /* à adapter selon ta taille souhaitée */
-  height: 200px;      /* idem */
+  width: 300px;
+  height: 200px;
   overflow: hidden;
-   margin: 0 auto;
-  /* Ou si la modal utilise flex, ajouter */
+  margin: 0 auto;
   align-self: center;
 }
 
@@ -601,13 +560,11 @@ modal page 2 retour  */
   display: block;
 }
 
-/* Bouton positionné au centre sur l'image */
 .upload-box button#addphotobtn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
@@ -616,29 +573,38 @@ modal page 2 retour  */
   transition: opacity 0.3s ease;
 }
 
-/* Cacher le bouton quand la classe "has-image" est ajoutée à upload-box */
 .upload-box.has-image button#addphotobtn {
   opacity: 0;
-  pointer-events: none; /* pour ne plus pouvoir cliquer dessus */
+  pointer-events: none;
 }
+
 #fileInput {
   display: none;
 }
-
 #barelogin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  color: white;
   display: flex;
-  justify-content: center;  /* Centre horizontalement */
-  align-items: center;      /* Aligne verticalement */
-  gap: 10px;                /* Espace entre l'image et le texte */
-  background-color: black;  /* Facultatif : pour voir le texte blanc */
-  padding: 10px;            /* Optionnel : pour un peu d'air autour */
-}
-
-#barelogin p {
-  color: white;             /* Texte blanc */
-  margin: 0;                /* Enlève la marge par défaut */
+  align-items: center;
+  justify-content: center; /* centre horizontalement */
+  gap: 10px; /* espace entre texte et image */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  z-index: 9999;
 }
 
 #barelogin img {
-  height: 20px;             /* Ajuste selon tes besoins */
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+#barelogin p {
+  margin: 0;
+  color: white; /* texte blanc */
 }

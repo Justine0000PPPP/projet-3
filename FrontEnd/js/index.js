@@ -206,7 +206,7 @@ const token = localStorage.getItem('token');
     // Utilisateur connecté
     loginBtn.style.display = 'none';
     logoutBtn.style.display = 'block';
-    barelogin.style.display = 'block';
+    barelogin.style.display = 'flex';
     filtres.style.display = 'none';  // cacher les filtres quand connecté
     ouvremodal.style.display = 'block';
   } else {
@@ -214,8 +214,8 @@ const token = localStorage.getItem('token');
     loginBtn.style.display = 'block';
     logoutBtn.style.display = 'none';
     barelogin.style.display = 'none';
-    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
-  ouvremodal.style.display = 'none';
+    filtres.style.display = 'flex'; // afficher les filtres quand déconnecté
+    ouvremodal.style.display = 'none';
   }
 logout()
 
@@ -261,7 +261,7 @@ function fetchimage() {
                 deleteBtn.title = "Supprimer cette photo";
 
                 const trashIcon = document.createElement('img');
-                trashIcon.src = 'BacKend/images/Backend/images/yconepoubelle.jpg';    
+                trashIcon.src = './assets/images/icone-poubelle.webp';    
                 trashIcon.alt = 'Supprimer';
                 trashIcon.style.width = '20px';
                 trashIcon.style.height = '20px';
@@ -313,73 +313,112 @@ function deleteimage(id, figureElement) {
     .catch(error => {
         console.error('Erreur de suppression', error);         
     });
-}
+}} )
 
 // modal page 2
-function page2() {
-const fileInput = document.getElementById('fileInput');
-const addPhotoBtn = document.getElementById('addphotobtn');
-const previewImage = document.getElementById('previewImage');
 
+const fileInput = document.getElementById('fileInput');        // L'input type="file" caché
+const addPhotoBtn = document.getElementById('addphotobtn');    // Le bouton visible pour déclencher l'import
+const previewImage = document.getElementById('previewImage');  // L'image de prévisualisation
+const titreInput = document.getElementById('titre');
+const categoriesSelect = document.getElementById('categories');
+const validateBtn = document.getElementById('validateBtn');
+function addimages() {
+
+// 2. Lorsqu'on clique sur le bouton visible, on simule un clic sur l'input caché
 addPhotoBtn.addEventListener('click', () => {
-  fileInput.click();  // ouvre la boîte de dialogue fichier
+  fileInput.click(); // Ceci ouvre la fenêtre native de sélection de fichiers
 });
 
+// 3. Quand l'utilisateur sélectionne un fichier
 fileInput.addEventListener('change', () => {
-  const file = fileInput.files[0];
-  if (!file) return; // pas de fichier sélectionné
+  const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
 
-  // Vérification du type MIME (jpg/jpeg/png)
-  if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
-    alert("Format non supporté. Veuillez sélectionner un fichier JPG ou PNG.");
-    fileInput.value = "";  // reset input
+  // --- Vérifications de base ---
+  if (!file) {
+    alert("Aucun fichier sélectionné.");
     return;
   }
 
-  // Vérification taille max 4 Mo (4 * 1024 * 1024 octets)
-  if (file.size > 4 * 1024 * 1024) {
-    alert("Le fichier est trop lourd. La taille maximale est 4 Mo.");
-    fileInput.value = "";  // reset input
+  // 3.1 Vérification du type MIME : uniquement PNG, JPG ou 
+  const validTypes = ['image/png', 'image/jpg']; // Types autorisés
+  if (!validTypes.includes(file.type)) {
+    alert("Seules les images PNG ou JPG sont autorisées.");
+    fileInput.value = ""; // Réinitialise l'input
     return;
   }
 
-  // Afficher l'aperçu dans l'image
-  const reader = new FileReader();
-  reader.onload = e => {
-    previewImage.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-
-  // pour cahcer le input
-addPhotoBtn.addEventListener('click', () => {
-  fileInput.click();  // ouvre la fenêtre de sélection des fichiers
-});
-
+  // 3.2 Vérification de la taille : max 2 Ko (2048 octets)
+  const maxSize = 4 * 1024 * 1024;  // 4mo max
+  if (file.size > maxSize) {
+    alert("L'image ne doit pas dépasser 2 Ko.");
+    fileInput.value = ""; // Réinitialise l'input
+    return;
   }
-  );
-  const selectElement = document.getElementById('categories');
 
-  selectElement.addEventListener('click', fetchCategories);
-  selectElement.addEventListener('focus', fetchCategories);
+  // --- Si tout est bon, on prévisualise l'image ---
 
-  }} )
-// il manque un bout la 
+  // Crée une URL temporaire (blob) pour afficher l'image dans le navigateur
+  const imageUrl = URL.createObjectURL(file);
 
-  document.getElementById('monBouton').addEventListener('click', () => {
-  fetch('https://exemple.com/api/endpoint', {
-    method: 'POST'
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Réponse API:', data);
-    alert('work ajouter !');
-  })
-  .catch(error => {
-    console.error('Erreur API:', error);
-    alert('Erreur lors de l\'appel API');
-  });
-});
+  // Met à jour la balise <img> pour afficher l'image choisie
+  previewImage.src = imageUrl;
+
+  // Applique l'image comme fond du bouton pour un effet visuel
+  addPhotoBtn.style.backgroundImage = `url(${imageUrl})`;
+  addPhotoBtn.style.backgroundSize = 'cover';
+  addPhotoBtn.style.backgroundPosition = 'center';
+  addPhotoBtn.style.color = 'transparent'; // Cache le texte du bouton
+
+  // Optionnel : effet visuel pour indiquer que c’est chargé
+  addPhotoBtn.style.opacity = '0.8';
+
+  // Optionnel : désactive le bouton pour éviter un second clic sans validation
+  addPhotoBtn.disabled = true;
+});}
+addimages()
+
+// pour valider 
+
+
+function validée() {
+  // Vérifie que l'image n'est pas l'image par défaut (preview chargée)
+  const LoadedImage = previewImage.src && !previewImage.src.includes('sophie-bluel.png');
+  // Vérifie que le titre n'est pas vide
+  const LoadedTitre = titreInput.value.trim().length > 0;
+  // Vérifie qu'une catégorie autre que 'tous' ou vide est sélectionnée
+  const CategorySelected = categoriesSelect.value !== 'tous' && categoriesSelect.value !== '';
+
+  if (LoadedImage && LoadedTitre && CategorySelected) {
+    validateBtn.disabled = false;            // Active le bouton (clic possible)
+    validateBtn.style.backgroundColor = 'green';  // Change la couleur en vert
+  } else {
+    validateBtn.disabled = true;             // Désactive le bouton (clic impossible)
+    validateBtn.style.backgroundColor = 'grey';   // Couleur grise pour montrer désactivé
+  }
+}
+
+// Ajoute des écouteurs pour vérifier le formulaire à chaque changement
+titreInput.addEventListener('input', validée);
+categoriesSelect.addEventListener('change', validée);
+validée()
 
 
 
-  
+
+// a comprendre si la futniton validée recuperbienles champ pour les sumaitre voir commentlier ca a api danslapelle fetch
+
+
+
+
+
+
+// apelle a api au clik 
+function fetchValidée() {
+  fetch('http://localhost:5678/api/categories')
+    .then(response => {
+      if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
+      return response.json();
+    })
+    .then
+    }
