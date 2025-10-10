@@ -252,10 +252,6 @@ function fetchimage() {
                 const imgModal = document.createElement('img');
                 imgModal.src = work.imageUrl;
                 imgModal.alt = work.title;
-
-                const figcaptionModal = document.createElement('figcaption');
-                figcaptionModal.textContent = work.title;
-
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-btn');
                 deleteBtn.title = "Supprimer cette photo";
@@ -273,7 +269,8 @@ function fetchimage() {
                 });
 
                 figureModal.appendChild(imgModal);
-                figureModal.appendChild(figcaptionModal);
+                // On enlève l'ajout du figcaption
+                // figureModal.appendChild(figcaptionModal);
                 figureModal.appendChild(deleteBtn);
 
                 galleryDivModal.appendChild(figureModal);
@@ -317,75 +314,100 @@ function deleteimage(id, figureElement) {
 
 // modal page 2
 
-const fileInput = document.getElementById('fileInput');        // L'input type="file" caché
-const addPhotoBtn = document.getElementById('addphotobtn');    // Le bouton visible pour déclencher l'import
-const previewImage = document.getElementById('previewImage');  // L'image de prévisualisation
-const titreInput = document.getElementById('titre');
-const categoriesSelect = document.getElementById('categories');
-const validateBtn = document.getElementById('validateBtn');
-function addimages() {
+    const fileInput = document.getElementById('fileInput');      
+    const addPhotoBtn = document.getElementById('addphotobtn');    
+    const previewImage = document.getElementById('previewImage');  
+    const titreInput = document.getElementById('titre');
+    const categoriesSelect = document.getElementById('categories');
+    const validateBtn = document.getElementById('validateBtn');
+    function addimages() {
 
-// 2. Lorsqu'on clique sur le bouton visible, on simule un clic sur l'input caché
-addPhotoBtn.addEventListener('click', () => {
-  fileInput.click(); // Ceci ouvre la fenêtre native de sélection de fichiers
-});
+    // 2. Lorsqu'on clique sur le bouton visible, on simule un clic sur l'input caché
+    addPhotoBtn.addEventListener('click', () => {
+      fileInput.click(); // Ceci ouvre la fenêtre native de sélection de fichiers
+    });
 
-// 3. Quand l'utilisateur sélectionne un fichier
-fileInput.addEventListener('change', () => {
-  const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
+    // 3. Quand l'utilisateur sélectionne un fichier
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
 
-  // --- Vérifications de base ---
-  if (!file) {
-    alert("Aucun fichier sélectionné.");
-    return;
+      // --- Vérifications de base ---
+      if (!file) {
+        alert("Aucun fichier sélectionné.");
+        return;
+      }
+
+      // 3.1 Vérification du type MIME : uniquement PNG, JPG ou 
+      const validTypes = ['image/png', 'image/jpg']; // Types autorisés
+      if (!validTypes.includes(file.type)) {
+        alert("Seules les images PNG ou JPG sont autorisées.");
+        fileInput.value = ""; // Réinitialise l'input
+        return;
+      }
+
+      // 3.2 Vérification de la taille : max 2 Ko (2048 octets)
+      const maxSize = 4 * 1024 * 1024;  // 4mo max
+      if (file.size > maxSize) {
+        alert("L'image ne doit pas dépasser 2 Ko.");
+        fileInput.value = ""; // Réinitialise l'input
+        return;
+      }
+
+      // --- Si tout est bon, on prévisualise l'image ---
+
+      // Crée une URL temporaire (blob) pour afficher l'image dans le navigateur
+      const imageUrl = URL.createObjectURL(file);
+  // Supprime l'icône si elle est présente
+  const icon = document.querySelector('.upload-box i');
+  if (icon) {
+    icon.style.display = 'none';
   }
 
-  // 3.1 Vérification du type MIME : uniquement PNG, JPG ou 
-  const validTypes = ['image/png', 'image/jpg']; // Types autorisés
-  if (!validTypes.includes(file.type)) {
-    alert("Seules les images PNG ou JPG sont autorisées.");
-    fileInput.value = ""; // Réinitialise l'input
-    return;
+  // Vérifie si une balise <img id="previewImage"> existe déjà, sinon la créer
+  let previewImage = document.getElementById('previewImage');
+  if (!previewImage) {
+    previewImage = document.createElement('img');
+    previewImage.id = 'previewImage';
+    previewImage.style.maxHeight = '200px';
+    previewImage.style.objectFit = 'contain';
+    previewImage.style.margin = '10px auto';
+    previewImage.style.display = 'block';
+
+    // L'insère dans .upload-box juste avant le <p>
+    const uploadBox = document.querySelector('.upload-box');
+    const fileInfo = uploadBox.querySelector('.file-info');
+    uploadBox.insertBefore(previewImage, fileInfo);
   }
 
-  // 3.2 Vérification de la taille : max 2 Ko (2048 octets)
-  const maxSize = 4 * 1024 * 1024;  // 4mo max
-  if (file.size > maxSize) {
-    alert("L'image ne doit pas dépasser 2 Ko.");
-    fileInput.value = ""; // Réinitialise l'input
-    return;
-  }
-
-  // --- Si tout est bon, on prévisualise l'image ---
-
-  // Crée une URL temporaire (blob) pour afficher l'image dans le navigateur
-  const imageUrl = URL.createObjectURL(file);
-
-  // Met à jour la balise <img> pour afficher l'image choisie
+  // Met à jour la source de l'image de prévisualisation
   previewImage.src = imageUrl;
 
-  // Applique l'image comme fond du bouton pour un effet visuel
-  addPhotoBtn.style.backgroundImage = `url(${imageUrl})`;
-  addPhotoBtn.style.backgroundSize = 'cover';
-  addPhotoBtn.style.backgroundPosition = 'center';
-  addPhotoBtn.style.color = 'transparent'; // Cache le texte du bouton
 
-  // Optionnel : effet visuel pour indiquer que c’est chargé
-  addPhotoBtn.style.opacity = '0.8';
+      // Applique l'image comme fond du bouton pour un effet visuel
+      addPhotoBtn.style.backgroundImage = `url(${imageUrl})`;
+      addPhotoBtn.style.backgroundSize = 'cover';
+      addPhotoBtn.style.backgroundPosition = 'center';
+      addPhotoBtn.style.color = 'transparent'; // Cache le texte du bouton
 
-  // Optionnel : désactive le bouton pour éviter un second clic sans validation
-  addPhotoBtn.disabled = true;
-});}
-addimages()
+      // Optionnel : effet visuel pour indiquer que c’est chargé
+      addPhotoBtn.style.opacity = '0.8';
+
+      // Optionnel : désactive le bouton pour éviter un second clic sans validation
+      addPhotoBtn.disabled = true;
+    });}
+    addimages()
 
 // pour valider 
 
-
+ 
 function validée() {
-  // Vérifie que l'image n'est pas l'image par défaut (preview chargée)
-  const LoadedImage = previewImage.src && !previewImage.src.includes('sophie-bluel.png');
+  const previewImage = document.getElementById('previewImage'); // Assure-toi que l'image de prévisualisation a bien cet ID
+  // Vérifie que l'image a bien été chargée (et que ce n'est plus juste une icône)
+  const LoadedImage = previewImage && previewImage.src && previewImage.src.startsWith('blob:');
+
   // Vérifie que le titre n'est pas vide
   const LoadedTitre = titreInput.value.trim().length > 0;
+
   // Vérifie qu'une catégorie autre que 'tous' ou vide est sélectionnée
   const CategorySelected = categoriesSelect.value !== 'tous' && categoriesSelect.value !== '';
 

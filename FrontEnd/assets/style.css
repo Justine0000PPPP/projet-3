@@ -323,7 +323,7 @@
   height: 500px;
   padding: 20px;
   margin: auto;
-  background-color: rgb(201, 219, 219);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -607,4 +607,109 @@
 #barelogin p {
   margin: 0;
   color: white; /* texte blanc */
+}
+
+
+.upload-box {
+  background-color:  rgb(201, 219, 219);
+  padding: 20px;             /* Espace intérieur */
+  border-radius: 8px;        /* Bords arrondis */
+  text-align: center;        /* Centrer contenu */
+  color: white;              /* Texte blanc par défaut */
+  max-width: 300px;          /* Largeur max */
+  margin: 20px auto;         /* Centrer horizontalement avec marge */
+}
+
+.upload-box i.fa-image {
+  font-size: 64px;          /* Taille de l’icône */
+  margin-bottom: 15px;      /* Espace sous l’icône */
+  display: block;           /* Pour appliquer margin-bottom */
+  color: rgb(115, 138, 117);               /* Icône en rouge */
+  transition: transform 0.3s ease; /* Animation au survol */
+}
+
+.upload-box i.fa-image:hover {
+  transform: scale(1.2);    /* Agrandir légèrement au survol */
+}
+
+.upload-box .upload-button {
+  background-color: yellow; /* Bouton jaune */
+  border: none;
+  color: black;             /* Texte noir pour contraste */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+   white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+
+.upload-box .upload-button:hover {
+  background-color: #e6d800; /* Jaune un peu plus foncé au survol */
+}
+
+.upload-box .file-info {
+  color: rgb(0, 0, 0);
+  margin-top: 8px; /* espace au-dessus du texte, sous le bouton */
+  font-size: 14px;
+ margin-top: 80px;
+}
+
+
+
+
+#modal-page2 form {
+  display: flex;
+  flex-direction: column; /* empile verticalement */
+  align-items: center;    /* centre horizontalement */
+  margin: 0 auto;
+}
+
+/* Champs texte et select */
+#modal-page2 input[type="text"],
+#modal-page2 select {
+  width: 300px;
+  max-width: 90vw;
+  box-sizing: border-box;
+  margin-bottom: 15px; /* espace entre les deux champs */
+}
+
+/* Ligne verte séparatrice */
+#modal-page2 .separator {
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  background-color: green;
+  margin: 20px 0; /* espace avant et après la ligne verte */
+}
+
+/* Bouton moins large */
+#modal-page2 input[type="submit"] {
+  width: 180px;
+  max-width: 90vw;
+  box-sizing: border-box;
+  margin-top: 15px; /* espace entre la ligne et le bouton */
+}
+
+
+/* Espace sous la galerie photo et au-dessus de la ligne verte */
+#photomodal {
+  margin-bottom: 20px; /* espace sous la galerie */
+}
+
+/* Style de la ligne verte (séparateur) */
+.separator {
+  border-top: 2px solid green; /* ligne verte */
+  margin: 0 auto;              /* centrer horizontalement */
+  width: 80%;                 /* largeur de la ligne, tu peux ajuster */
+  margin-bottom: 20px;         /* espace sous la ligne verte */
+}
+
+/* Espace au-dessus du bouton (déjà fait par margin-bottom de la ligne verte) */
+#ajouterphoto {
+  display: block;
+  margin: 0 auto; /* centre le bouton */
 }
