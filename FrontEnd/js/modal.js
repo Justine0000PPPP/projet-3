@@ -4,14 +4,14 @@
 
 let modal = null;  // variable globale pour la modal active
 document.addEventListener('DOMContentLoaded', () => {
+let modal = null;  // variable globale pour la modal active
 
-// Pour ouvrire la modal 
-  const openmodal = function(e) {
+// Fonction pour ouvrir la modal
+function openmodal(e) {
   e.preventDefault();
 
   // Récupérer la modal cible via data-target
   const target = document.querySelector(e.currentTarget.getAttribute('data-target'));
-
   if (!target) return; // sécurité si cible introuvable
 
   target.style.display = "flex";
@@ -22,42 +22,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Appelle ta fonction pour charger les images (à garder si tu veux)
   fetchimage();
-};
+}
 
-// Fonction pour fermer la modal si clic en dehors du contenu
-const closemodal = function(e) {
+// Fonction pour fermer la modal si clic sur le fond
+function closemodal(e) {
   if (e.target === modal) {
     modal.style.display = "none";
     modal = null;
   }
-};
+}
+
+    // Fonction pour fermer la modal directement (bouton croix)
+    function fermerModal() {
+    if (modal) {
+        modal.style.display = "none";
+        modal = null;
+    }
+    }
+
+    // Ajout des écouteurs sur les éléments qui ouvrent la modal
+    document.querySelectorAll('.js-modal').forEach(link => {
+    link.addEventListener('click', openmodal);
+    });
+
+    // Ajout de l'écouteur pour fermer la modal avec le bouton "sortie"
+    document.getElementById('sortie').addEventListener('click', fermerModal);// Gestion de l'apparition des pages dans la modal
+    const page1 = document.getElementById('modal-page1');
+    const page2 = document.getElementById('modal-page2');
+
+
+    document.getElementById('ajouterphoto').addEventListener('click', () => {
+        page1.style.display = 'none';      
+        page2.style.display = 'block'; 
+        fetchselect();
+    });
+
+    // Retour dans la modal
+    document.getElementById('retourp2').addEventListener('click', () => { 
+        page1.style.display = 'block';      
+        page2.style.display = 'none'; 
+
+    });
 
 
 
-// Ajout des écouteurs sur tous les liens qui ouvrent la modal
-document.querySelectorAll('.js-modal').forEach(link => {
-  link.addEventListener('click', openmodal);
-});
 
 
 
-// Gestion de l'apparition des pages dans la modal
-const page1 = document.getElementById('modal-page1');
-const page2 = document.getElementById('modal-page2');
 
 
-document.getElementById('ajouterphoto').addEventListener('click', () => {
-    page1.style.display = 'none';      
-    page2.style.display = 'block'; 
-    fetchselect();
-});
 
-// Retour dans la modal
-document.getElementById('retourp2').addEventListener('click', () => { 
-    page1.style.display = 'block';      
-    page2.style.display = 'none'; 
-
-});
 // /: parite loguot
 
 // Cibler le bouton logout 
@@ -87,13 +101,13 @@ const token = localStorage.getItem('token');
   if (token) {
     // Utilisateur connecté
     loginBtn.style.display = 'none';
-    logoutBtn.style.display = 'block';
+    logoutBtn.style.display = 'flex';
     barelogin.style.display = 'flex';
     filtres.style.display = 'none';  // cacher les filtres quand connecté
     ouvremodal.style.display = 'block';
   } else {
     // Utilisateur déconnecté
-    loginBtn.style.display = 'block';
+    loginBtn.style.display = 'flex';
     logoutBtn.style.display = 'none';
     barelogin.style.display = 'none';
     filtres.style.display = 'flex'; // afficher les filtres quand déconnecté
@@ -104,11 +118,10 @@ logout()
   
 
 
-
 //  modal page 1
 
 // Fonction pour récupérer et afficher les images dans la modal
-function fetchimage() { 
+function fetchimage() {  
     fetch('http://localhost:5678/api/works')
         .then(response => {
             if (!response.ok) {
@@ -309,27 +322,20 @@ function fetchselect() {
 
 // pour valider 
 
- 
 function validée() {
-  const previewImage = document.getElementById('previewImage'); // Assure-toi que l'image de prévisualisation a bien cet ID
-  // Vérifie que l'image a bien été chargée (et que ce n'est plus juste une icône)
+  const previewImage = document.getElementById('previewImage'); 
   const LoadedImage = previewImage && previewImage.src && previewImage.src.startsWith('blob:');
-
-  // Vérifie que le titre n'est pas vide
   const LoadedTitre = titreInput.value.trim().length > 0;
-
-  // Vérifie qu'une catégorie autre que 'tous' ou vide est sélectionnée
   const CategorySelected = categoriesSelect.value !== 'tous' && categoriesSelect.value !== '';
 
   if (LoadedImage && LoadedTitre && CategorySelected) {
-    validateBtn.disabled = false;            // Active le bouton (clic possible)
-    validateBtn.style.backgroundColor = 'green';  // Change la couleur en vert
+    validateBtn.disabled = false;            
+    validateBtn.style.backgroundColor = 'green';  
   } else {
-    validateBtn.disabled = true;             // Désactive le bouton (clic impossible)
-    validateBtn.style.backgroundColor = 'grey';   // Couleur grise pour montrer désactivé
+    validateBtn.disabled = true;             
+    validateBtn.style.backgroundColor = 'grey';   
   }
 }
-
 // Ajoute des écouteurs pour vérifier le formulaire à chaque changement
 titreInput.addEventListener('input', validée);
 categoriesSelect.addEventListener('change', validée);
@@ -338,19 +344,62 @@ validée()
 
 
 
-// a comprendre si la futniton validée recuperbienles champ pour les sumaitre voir commentlier ca a api danslapelle fetch
-
-
-
-
-
-
 // apelle a api au clik 
 function fetchValidée() {
-  fetch('http://localhost:5678/api/categories')
+  const file = fileInput.files[0]; // Récupère le fichier image
+  const title = titreInput.value.trim();
+  const category = categoriesSelect.value;
+  const token = localStorage.getItem('token'); // Token pour l'authentification
+
+  // Vérification des champs
+  if (!file || !title || !category || category === 'all') {
+    alert("Tous les champs doivent être remplis.");
+    return;
+  }
+
+  // Préparer les données à envoyer avec FormData
+  const formData = new FormData();
+  formData.append("image", file);
+  formData.append("title", title);
+  formData.append("category", category);
+
+  // Requête POST vers l’API
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}` // Auth avec token
+    },
+    body: formData
+  })
     .then(response => {
-      if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'envoi de l'image.");
+      }
       return response.json();
     })
-    .then
-    }
+    .then(data => {
+      console.log("Image ajoutée :", data);
+      alert("Photo ajoutée avec succès !");
+
+
+    //   // Optionnel : recharger la galerie après ajout
+    //   fetchimage();
+
+    //   // Réinitialiser le formulaire
+    //   document.querySelector('.form-section').reset();
+    //   const preview = document.getElementById('previewImage');
+    //   if (preview) preview.remove();
+    //   document.querySelector('.upload-box i').style.display = 'block';
+    //   addPhotoBtn.disabled = false;
+    //   addPhotoBtn.style = ""; // reset style
+
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Erreur lors de l'ajout.");
+    });
+}
+
+
+// a verifier si vriament nesessaire 
+document.getElementById('validateBtn').addEventListener('click', fetchValidée);

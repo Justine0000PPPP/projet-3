@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	</head> 
 	<body>
-		<div id="barelogin">
+		<div id="barelogin">  
 			
 			<p><i class="fa-solid fa-pen-to-square"></i>  Mode édition</p>
 		</div>
@@ -24,10 +24,10 @@
 				<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 				<nav>
 					<ul>
-						<li>projets</li>
+						<li>projets</li> 
 						<li>contact</li>
 						<li id="login"><a href="login.html">login</a></li>
-						<li><button id="logout">logout</button> </li>  
+						<li id="logout"><a href="#">logout</a></li>  
 						<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 					</ul>
 				</nav>
@@ -76,7 +76,8 @@
 
 				</section>
 				 <div class="separator"></div>
-				<button id="ajouterphoto">ajouter une photo</button>  					
+				<button id="ajouterphoto">ajouter une photo</button>
+				utton id="sortie" class="modal-back">✖</button>  					
 			</div> 
 			
 			
@@ -85,16 +86,14 @@
 			<form class="form-section">
   <div class="upload-section">
     <div class="upload-box">
-     <!-- Input file caché -->
+
 <input type="file" id="fileInput" >
 
-<!-- Bouton visible pour déclencher la sélection -->
-<button class="upload-button" type="button" id="addphotobtn">Plus ajout photos</button>
+<button class="upload-button" type="button" id="addphotobtn">+ ajouter  photo</button>
 
-<!-- Image prévisualisation -->
 <i class="fa-regular fa-image"></i>
 	 
-	  <p class="file-info">Mettre la taille de l'image max</p>
+	  <p class="file-info">jpg.png : 4mo max</p>
     </div>
   </div>
 
@@ -112,6 +111,7 @@
  
  
 				<button id="retourp2" class="modal-back">←</button>
+	<button id="sortie" class="modal-back">✖</button>
 			</div>
 			
 		</aside>

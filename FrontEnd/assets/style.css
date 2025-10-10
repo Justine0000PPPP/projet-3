@@ -702,7 +702,7 @@
 
 /* Style de la ligne verte (séparateur) */
 .separator {
-  border-top: 2px solid green; /* ligne verte */
+  border-top: 2px solid rgb(83, 109, 83); /* ligne verte */
   margin: 0 auto;              /* centrer horizontalement */
   width: 80%;                 /* largeur de la ligne, tu peux ajuster */
   margin-bottom: 20px;         /* espace sous la ligne verte */
@@ -712,4 +712,74 @@
 #ajouterphoto {
   display: block;
   margin: 0 auto; /* centre le bouton */
+}
+
+#barelogin i {
+  margin-right: 5px;
+}
+.upload-box img#previewImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.titre {
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+#modal-page1 .blokimagemodal {
+  max-width: 600px;   /* limite largeur du bloc global */
+  margin: 20px auto;  /* marge en haut/bas et centrage horizontal */
+  padding: 10px;      /* espace intérieur autour du contenu */
+  overflow-y: auto;   /* scroll vertical si trop grand */
+  max-height: 70vh;   /* limite hauteur à 70% de la hauteur viewport */
+  box-sizing: border-box; /* inclure padding dans la taille */
+}
+
+#modal-page1 .gallery-modal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;          /* espace entre chaque image */
+  justify-content: center; /* centrer les images */
+}
+
+#modal-page1 .gallery-modal figure {
+  flex: 0 1 calc(25% - 12px); /* 4 images par ligne, ajusté avec gap */
+  margin: 0;
+}
+
+#modal-page1 .gallery-modal img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px; /* optionnel, arrondir un peu les coins */
+  object-fit: cover;  /* éviter déformation */
+}
+#modal-page1 #ajouterphoto {
+  margin-bottom: 20px;
+}
+
+
+#modal-page2 {
+  position: relative; /* Nécessaire pour positionner les boutons à l’intérieur */
+}
+
+
+#sortie {
+  position: absolute;
+  top: 10px;
+  right: 2px;
+}
+
+.modal-page {
+  display: none;
+}
+
+#filtres {
+  display: flex;
+  justify-content: center;  /* centre horizontalement les éléments enfants */
+  align-items: center;      /* centre verticalement s’il y a une hauteur définie */
 }
