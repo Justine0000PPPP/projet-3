@@ -463,14 +463,13 @@
   border-radius: 4px;
   font-size: 14px;
 }
-
 .validate-button {
-  width: 100%;
+  width: 120%;              /* Bouton plus large */
   background-color: #c0c0c0;
   border: none;
   padding: 12px;
   margin-top: 20px;
-  border-radius: 20px;
+  border-radius: 50px;      /* Bords plus arrondis */
   font-size: 16px;
   cursor: pointer;
 }
@@ -778,8 +777,42 @@
   display: none;
 }
 
-#filtres {
-  display: flex;
-  justify-content: center;  /* centre horizontalement les éléments enfants */
-  align-items: center;      /* centre verticalement s’il y a une hauteur définie */
+nav ul li a {
+  color: inherit;       /* Prend la couleur normale du texte */
+  text-decoration: none; /* Pas de soulignement */
+  cursor: text;          /* Curseur texte (comme pour un p), ou pointer si tu préfères */
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  text-decoration: none; /* Toujours pas de soulignement au survol/focus */
+  color: inherit;        /* Pas de changement de couleur */
+}	
+.titre {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: none !important;
+}
+/* 
+form label {
+  text-align: left;
+  display: block;
+} */
+
+
+#sortie, #retourp2 {
+  position: absolute;
+  top: 10px;  /* décale un peu du haut */
+  cursor: pointer;
+  font-size: 24px; /* taille visible */
+  user-select: none; /* évite la sélection au clic */
+}
+
+#sortie {
+  right: 10px; /* à droite */
+}
+
+#retourp2 {
+  left: 10px; /* à gauche */
 }

@@ -297,17 +297,11 @@ function fetchselect() {
       return response.json();
     })
     .then(categories => {
-      addselect(categories);
-} )}
-
-    function addselect() {
+    
       // === AJOUT options dans le select ===
+    
       const select = document.getElementById('categories');
 
-        const optionAll = document.createElement('option');
-        optionAll.value = 'all';
-        optionAll.textContent = 'choisire une catégorie';
-        select.appendChild(optionAll);
 
         categories.forEach(category => {
           const option = document.createElement('option');
@@ -315,32 +309,36 @@ function fetchselect() {
           option.textContent = category.name;
           select.appendChild(option);
         });
-      };
+    
      
+} )}
+ 
 
 
 
-// pour valider 
-
+// pour valider a finir 
 function validée() {
   const previewImage = document.getElementById('previewImage'); 
   const LoadedImage = previewImage && previewImage.src && previewImage.src.startsWith('blob:');
   const LoadedTitre = titreInput.value.trim().length > 0;
-  const CategorySelected = categoriesSelect.value !== 'tous' && categoriesSelect.value !== '';
+  const CategorySelected = categoriesSelect.value !== '' && categoriesSelect.value.toLowerCase() !== 'choisir une catégorie';
+  const separator = document.querySelector('.separator');
 
-  if (LoadedImage && LoadedTitre && CategorySelected) {
-    validateBtn.disabled = false;            
-    validateBtn.style.backgroundColor = 'green';  
-  } else {
-    validateBtn.disabled = true;             
-    validateBtn.style.backgroundColor = 'grey';   
-  }
+if (LoadedImage && LoadedTitre && CategorySelected) {
+  validateBtn.disabled = false;
+  validateBtn.style.backgroundColor = 'green';
+  if (separator) separator.style.backgroundColor = 'green';
+} else {
+  validateBtn.disabled = true;
+  validateBtn.style.backgroundColor = 'grey';
+  if (separator) separator.style.backgroundColor = 'grey';
 }
+}
+
 // Ajoute des écouteurs pour vérifier le formulaire à chaque changement
 titreInput.addEventListener('input', validée);
 categoriesSelect.addEventListener('change', validée);
-validée()
-
+validée();
 
 
 
@@ -349,8 +347,7 @@ function fetchValidée() {
   const file = fileInput.files[0]; // Récupère le fichier image
   const title = titreInput.value.trim();
   const category = categoriesSelect.value;
-  const token = localStorage.getItem('token'); // Token pour l'authentification
-
+  const token = localStorage.getItem('token');  
   // Vérification des champs
   if (!file || !title || !category || category === 'all') {
     alert("Tous les champs doivent être remplis.");
@@ -401,5 +398,5 @@ function fetchValidée() {
 }
 
 
-// a verifier si vriament nesessaire 
+// a verifier si vraiment nesessaire 
 document.getElementById('validateBtn').addEventListener('click', fetchValidée);
