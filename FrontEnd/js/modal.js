@@ -46,7 +46,15 @@ function closemodal(e) {
     });
 
     // Ajout de l'écouteur pour fermer la modal avec le bouton "sortie"
-    document.getElementById('sortie').addEventListener('click', fermerModal);// Gestion de l'apparition des pages dans la modal
+    const boutonsSortie = [document.getElementById('sortiep1'), document.getElementById('sortiep2')];
+
+// Ajoute l'écouteur à chacun s'il existe
+boutonsSortie.forEach(btn => {
+  if (btn) {
+    btn.addEventListener('click', fermerModal);
+  }
+});
+    // Gestion de l'apparition des pages dans la modal
     const page1 = document.getElementById('modal-page1');
     const page2 = document.getElementById('modal-page2');
 
@@ -113,7 +121,7 @@ const token = localStorage.getItem('token');
     filtres.style.display = 'flex'; // afficher les filtres quand déconnecté
     ouvremodal.style.display = 'none';
   }
-logout()
+//  
 
   
 
@@ -321,17 +329,16 @@ function validée() {
   const previewImage = document.getElementById('previewImage'); 
   const LoadedImage = previewImage && previewImage.src && previewImage.src.startsWith('blob:');
   const LoadedTitre = titreInput.value.trim().length > 0;
-  const CategorySelected = categoriesSelect.value !== '' && categoriesSelect.value.toLowerCase() !== 'choisir une catégorie';
-  const separator = document.querySelector('.separator');
+ const separator = document.querySelector('.separator'); // ← récupère la ligne
 
-if (LoadedImage && LoadedTitre && CategorySelected) {
-  validateBtn.disabled = false;
-  validateBtn.style.backgroundColor = 'green';
-  if (separator) separator.style.backgroundColor = 'green';
+  if (LoadedImage && LoadedTitre && CategorySelected) {
+    validateBtn.disabled = false;
+    validateBtn.style.backgroundColor = 'green';
+    separator.style.backgroundColor = 'green'; 
 } else {
   validateBtn.disabled = true;
   validateBtn.style.backgroundColor = 'grey';
-  if (separator) separator.style.backgroundColor = 'grey';
+  separator.style.backgroundColor = 'grey'; 
 }
 }
 

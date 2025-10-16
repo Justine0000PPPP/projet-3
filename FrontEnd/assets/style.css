@@ -463,6 +463,23 @@
   border-radius: 4px;
   font-size: 14px;
 }
+
+
+#modal-page2 .separator {
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  background-color: grey;     /* Couleur par défaut, comme le bouton désactivé */
+  margin: 20px 0;
+  border-radius: 50px;        /* Même style arrondi que le bouton */
+  opacity: 0.6;               /* Apparence plus douce désactivée */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+
+
+
+
 .validate-button {
   width: 120%;              /* Bouton plus large */
   background-color: #c0c0c0;
@@ -676,14 +693,7 @@
   margin-bottom: 15px; /* espace entre les deux champs */
 }
 
-/* Ligne verte séparatrice */
-#modal-page2 .separator {
-  width: 100%;
-  max-width: 300px;
-  height: 2px;
-  background-color: green;
-  margin: 20px 0; /* espace avant et après la ligne verte */
-}
+
 
 /* Bouton moins large */
 #modal-page2 input[type="submit"] {
@@ -794,25 +804,20 @@ nav ul li a:focus {
   outline: none !important;
   background: none !important;
 }
-/* 
-form label {
-  text-align: left;
+
+
+.formp2 {
   display: block;
-} */
+  text-align: left;
+  margin-left: 0;
+}
 
-
-#sortie, #retourp2 {
-  position: absolute;
-  top: 10px;  /* décale un peu du haut */
+#sortiep1, #sortiep2 {
+  display: block;
+  margin-left: auto;      /* pousse l'élément à droite */
+  margin-right: 0;        /* assure qu'il colle bien à droite */
+  color: red;
   cursor: pointer;
-  font-size: 24px; /* taille visible */
-  user-select: none; /* évite la sélection au clic */
-}
-
-#sortie {
-  right: 10px; /* à droite */
-}
-
-#retourp2 {
-  left: 10px; /* à gauche */
+  font-size: 24px;
+  user-select: none;
 }
