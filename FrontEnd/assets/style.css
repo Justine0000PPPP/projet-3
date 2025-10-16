@@ -188,31 +188,66 @@
 
 
 
-	/*parti rajouter pour ex */
-#filtres { 
-  display: flex;
-  justify-content: center;  
-  gap: 12px;               
-  margin: 20px 0;          
-}
+	/*partie rajouté pour ex */
+/* bare login  */
+	#barelogin {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px; 
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	z-index: 9999;
+	}
 
-#filtres button {
-  padding: 8px 16px;
-  border: 2px solid  #1D6154;
-  border-radius: 12px;
-  background-color: white;
-  color:  #1D6154;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+	#barelogin img {
+	height: 24px;
+	object-fit: contain;
+	display: block;
+	}
 
-#filtres button:hover {
-  background-color:  #1D6154;
-  color: white;
-}
+	#barelogin p {
+	margin: 0;
+	color: white; 
+	}
+		
+	#barelogin i {
+	margin-right: 5px;
+	}
+/* filtre bouttons  */
 
+	#filtres { 
+	display: flex;
+	justify-content: center;  
+	gap: 12px;               
+	margin: 20px 0;          
+	}
 
+	#filtres button {
+	padding: 8px 16px;
+	border: 2px solid  #1D6154;
+	border-radius: 12px;
+	background-color: white;
+	color:  #1D6154;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	}
+
+	#filtres button:hover {
+	background-color:  #1D6154;
+	color: white;
+	}
+
+/* 
+page login */
 	#login {
 		width: 50%;
 	margin: auto;
@@ -267,145 +302,181 @@
 	/* style des modals */
 
 
-.entete {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 1em;
-}
+	.entete {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	justify-content: center;
+	margin-bottom: 1em;
+	}
 
-.modifier-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  color: rgb(13, 12, 12);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-  font-family: 'Work Sans', sans-serif;
-  text-transform: none;
-}
+	.modifier-btn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background: none;
+	border: none;
+	color: rgb(13, 12, 12);
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 0;
+	font-family: 'Work Sans', sans-serif;
+	text-transform: none;
+	}
 
-.modifier-btn .icon-pencil {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-}
+	.modifier-btn .icon-pencil {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	}
 
-.invisible-link {
-  display: none;
-}
+	.invisible-link {
+	display: none;
+	}
 
-.gallery figure {
-  position: relative;
-}
+	.gallery figure {
+	position: relative;
+	}
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(161, 155, 155, 0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
+	.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(161, 155, 155, 0.6);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	}
 
-#modal-page1, #modal-page2, #modal-page3 {
-  text-align: center;
-  overflow: auto;
-  width: 800px;
-  height: 500px;
-  padding: 20px;
-  margin: auto;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+	#modal-page1, #modal-page2  {
+	text-align: center;
+	overflow: auto;
+	width: 800px;
+	height: 500px;
+	padding: 20px;
+	margin: auto;
+	background-color: rgb(255, 255, 255);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	}
 
-#modal-page2 {
-  position: relative;
-}
+	#modal-page2 {
+	position: relative;
+	}
 
 .titre {
-  background-color: white;
   color: #555555;
   font-weight: 600;
   font-size: 2rem;
-  padding: 10px 20px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  max-width: fit-content;
-  margin: 0 auto 20px auto;
   text-align: center;
   user-select: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background: none;
+  margin: 30px auto 12px auto;
+  padding: 10px 20px;
+  border-radius: 6px;
+  max-width: fit-content;
 }
 
-.gallery-modal {
+
+/* modal page 1 */
+	.gallery-modal {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 15px;
+	max-width: 100%;
+	overflow-y: auto;
+	padding: 10px;
+	}
+
+	.gallery-modal figure {
+	flex: 1 1 150px;
+	max-width: 200px;
+	margin: 0 10px 20px 10px;
+	position: relative;
+	}
+
+	.gallery-modal img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	object-fit: contain;
+	}
+
+	#ajouterphoto {
+	background-color:  #1D6154;
+	color: white;
+	border: none;
+	padding: 12px 20px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-top: auto;
+	align-self: center;
+	}
+
+
+	.delete-btn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	outline: none;
+	z-index: 10;
+	}
+
+	.delete-btn img {
+	width: 20px;
+	height: 20px;
+	}
+
+#modal-page1 .blokimagemodal {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 70vh;
+  box-sizing: border-box;
+}
+
+#modal-page1 .gallery-modal {
   display: flex;
   flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
-  gap: 15px;
-  max-width: 100%;
-  overflow-y: auto;
-  padding: 10px;
 }
 
-.gallery-modal figure {
-  flex: 1 1 150px;
-  max-width: 200px;
-  margin: 0 10px 20px 10px;
-  position: relative;
+#modal-page1 .gallery-modal figure {
+  flex: 0 1 calc(25% - 12px);
+  margin: 0;
 }
 
-.gallery-modal img {
-  max-width: 100%;
+#modal-page1 .gallery-modal img {
+  width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
-  object-fit: contain;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
-#ajouterphoto {
-  background-color: #448353;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: auto;
-  align-self: center;
+#modal-page1 #ajouterphoto {
+  margin-bottom: 20px;
 }
 
-#ajouterphoto:hover {
-  background-color: #218838;
-}
-
-.delete-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  outline: none;
-  z-index: 10;
-}
-
-.delete-btn img {
-  width: 20px;
-  height: 20px;
-}
+/* modal page 2  */
 
 .uplaod-section {
   background-color: gray;
@@ -469,31 +540,25 @@
   width: 100%;
   max-width: 300px;
   height: 2px;
-  background-color: grey;     /* Couleur par défaut, comme le bouton désactivé */
+  background-color: grey;    
   margin: 20px 0;
-  border-radius: 50px;        /* Même style arrondi que le bouton */
-  opacity: 0.6;               /* Apparence plus douce désactivée */
-  transition: background-color 0.3s ease, opacity 0.3s ease;
+  border-radius: 50px;        
+  opacity: 0.6;              
+
 }
 
 
-
-
-
 .validate-button {
-  width: 120%;              /* Bouton plus large */
+  width: 120%;              
   background-color: #c0c0c0;
   border: none;
   padding: 12px;
   margin-top: 20px;
-  border-radius: 50px;      /* Bords plus arrondis */
+  border-radius: 50px;      
   font-size: 16px;
   cursor: pointer;
 }
 
-.validate-button:hover {
-  background-color: #a0a0a0;
-}
 
 .validate-button:disabled {
   background-color: grey;
@@ -502,9 +567,8 @@
 }
 
 .validate-button:enabled {
-  background-color: green;
-  cursor: pointer;
-  opacity: 1;
+  background-color:  #1D6154
+  opacity 1;
 }
 
 .modal-back {
@@ -519,61 +583,27 @@
   color: black;
   z-index: 10;
 }
-
-#barelogin {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 9999;
-  height: 50px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  gap: 10px;
-}
-
-.baretxt {
-  width: 20px;
-  height: 100%;
-  margin-left: 20px;
-}
-
-#barelogin img {
-  height: 24px;
-  object-fit: contain;
-  display: block;
-}
-
-#barelogin p {
-  margin: 0;
-  line-height: 1;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-}
-
 .upload-box {
   position: relative;
   width: 300px;
+  max-width: 300px;
   height: 200px;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 20px auto;      
   align-self: center;
+  background-color: rgb(201, 219, 219);
+  padding: 20px;          
+  border-radius: 8px;     
+  text-align: center;     
+  color: white;           
 }
 
 .upload-box img#previewImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 .upload-box button#addphotobtn {
@@ -584,9 +614,9 @@
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 20px; 
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  
 }
 
 .upload-box.has-image button#addphotobtn {
@@ -597,227 +627,113 @@
 #fileInput {
   display: none;
 }
-#barelogin {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* centre horizontalement */
-  gap: 10px; /* espace entre texte et image */
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  z-index: 9999;
-}
 
-#barelogin img {
-  height: 24px;
-  object-fit: contain;
-  display: block;
-}
-
-#barelogin p {
-  margin: 0;
-  color: white; /* texte blanc */
-}
-
-
-.upload-box {
-  background-color:  rgb(201, 219, 219);
-  padding: 20px;             /* Espace intérieur */
-  border-radius: 8px;        /* Bords arrondis */
-  text-align: center;        /* Centrer contenu */
-  color: white;              /* Texte blanc par défaut */
-  max-width: 300px;          /* Largeur max */
-  margin: 20px auto;         /* Centrer horizontalement avec marge */
-}
 
 .upload-box i.fa-image {
-  font-size: 64px;          /* Taille de l’icône */
-  margin-bottom: 15px;      /* Espace sous l’icône */
-  display: block;           /* Pour appliquer margin-bottom */
-  color: rgb(115, 138, 117);               /* Icône en rouge */
-  transition: transform 0.3s ease; /* Animation au survol */
+  font-size: 64px;          
+  margin-bottom: 15px;      
+  display: block;           
+  color: rgb(115, 138, 117);       
 }
 
 .upload-box i.fa-image:hover {
-  transform: scale(1.2);    /* Agrandir légèrement au survol */
+  transform: scale(1.2);    
 }
 
-.upload-box .upload-button {
-  background-color: yellow; /* Bouton jaune */
-  border: none;
-  color: black;             /* Texte noir pour contraste */
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-   white-space: nowrap; /* Empêche le texte de passer à la ligne */
-}
-
-
-.upload-box .upload-button:hover {
-  background-color: #e6d800; /* Jaune un peu plus foncé au survol */
-}
 
 .upload-box .file-info {
   color: rgb(0, 0, 0);
-  margin-top: 8px; /* espace au-dessus du texte, sous le bouton */
+  margin-top: 8px; 
   font-size: 14px;
  margin-top: 80px;
 }
 
 
-
-
 #modal-page2 form {
   display: flex;
-  flex-direction: column; /* empile verticalement */
-  align-items: center;    /* centre horizontalement */
+  flex-direction: column; 
+  align-items: center;    
   margin: 0 auto;
 }
 
 /* Champs texte et select */
+
 #modal-page2 input[type="text"],
 #modal-page2 select {
   width: 300px;
   max-width: 90vw;
   box-sizing: border-box;
-  margin-bottom: 15px; /* espace entre les deux champs */
+  margin-bottom: 15px; 
 }
 
 
-
-/* Bouton moins large */
 #modal-page2 input[type="submit"] {
   width: 180px;
   max-width: 90vw;
   box-sizing: border-box;
-  margin-top: 15px; /* espace entre la ligne et le bouton */
+  margin-top: 15px; 
 }
 
 
-/* Espace sous la galerie photo et au-dessus de la ligne verte */
 #photomodal {
-  margin-bottom: 20px; /* espace sous la galerie */
+  margin-bottom: 20px; 
 }
 
 /* Style de la ligne verte (séparateur) */
 .separator {
-  border-top: 2px solid rgb(83, 109, 83); /* ligne verte */
-  margin: 0 auto;              /* centrer horizontalement */
-  width: 80%;                 /* largeur de la ligne, tu peux ajuster */
-  margin-bottom: 20px;         /* espace sous la ligne verte */
-}
-
-/* Espace au-dessus du bouton (déjà fait par margin-bottom de la ligne verte) */
-#ajouterphoto {
-  display: block;
-  margin: 0 auto; /* centre le bouton */
-}
-
-#barelogin i {
-  margin-right: 5px;
-}
-.upload-box img#previewImage {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-.titre {
-  margin-top: 30px;
-  margin-bottom: 12px;
-}
-
-#modal-page1 .blokimagemodal {
-  max-width: 600px;   /* limite largeur du bloc global */
-  margin: 20px auto;  /* marge en haut/bas et centrage horizontal */
-  padding: 10px;      /* espace intérieur autour du contenu */
-  overflow-y: auto;   /* scroll vertical si trop grand */
-  max-height: 70vh;   /* limite hauteur à 70% de la hauteur viewport */
-  box-sizing: border-box; /* inclure padding dans la taille */
-}
-
-#modal-page1 .gallery-modal {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;          /* espace entre chaque image */
-  justify-content: center; /* centrer les images */
-}
-
-#modal-page1 .gallery-modal figure {
-  flex: 0 1 calc(25% - 12px); /* 4 images par ligne, ajusté avec gap */
-  margin: 0;
-}
-
-#modal-page1 .gallery-modal img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px; /* optionnel, arrondir un peu les coins */
-  object-fit: cover;  /* éviter déformation */
-}
-#modal-page1 #ajouterphoto {
-  margin-bottom: 20px;
+  border-top: 2px solid  #1D6154 
+  margin 0 auto;              
+  width: 80%;                 
+  margin-bottom: 20px;        
 }
 
 
 #modal-page2 {
-  position: relative; /* Nécessaire pour positionner les boutons à l’intérieur */
+  position: relative; 
 }
 
-
-#sortie {
-  position: absolute;
-  top: 10px;
-  right: 2px;
-}
-
-.modal-page {
-  display: none;
-}
 
 nav ul li a {
-  color: inherit;       /* Prend la couleur normale du texte */
-  text-decoration: none; /* Pas de soulignement */
-  cursor: text;          /* Curseur texte (comme pour un p), ou pointer si tu préfères */
+  color: inherit;       
+  text-decoration: none; 
+  cursor: text;          
 }
 
-nav ul li a:hover,
-nav ul li a:focus {
-  text-decoration: none; /* Toujours pas de soulignement au survol/focus */
-  color: inherit;        /* Pas de changement de couleur */
-}	
-.titre {
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-  background: none !important;
-}
 
+/* position de la fleche et de la croix de la modal  */
 
 .formp2 {
   display: block;
   text-align: left;
   margin-left: 0;
 }
+/* Assure-toi que le parent est en position relative */
+#modal-page2 {
+  position: relative;
+}
 
-#sortiep1, #sortiep2 {
+/* Conteneur des boutons */
+.tetemodal {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10;
+}
+#sortiep2 {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.formp2 {
   display: block;
-  margin-left: auto;      /* pousse l'élément à droite */
-  margin-right: 0;        /* assure qu'il colle bien à droite */
-  color: red;
-  cursor: pointer;
-  font-size: 24px;
-  user-select: none;
+  text-align: left;
+  margin: 1em 0 0.3em;
+  font-weight: 500;
+  color: #333;
 }

@@ -81,50 +81,44 @@ boutonsSortie.forEach(btn => {
 
 
 // /: parite loguot
-
-// Cibler le bouton logout 
-// function logout() {
-const logoutBtn = document.getElementById('logout');
-
  
-  logoutBtn.addEventListener('click', async() => {
-    // Supprimer le token
-    localStorage.removeItem('token');
-     loginBtn.style.display = 'block';
-    logoutBtn.style.display = 'none';
-    barelogin.style.display = 'none';
-    filtres.style.display = 'block'; // afficher les filtres quand déconnecté
-  ouvremodal.style.display = 'none';
-
-  });
-
-
-const token = localStorage.getItem('token');
+// Fonction qui met à jour l'affichage en fonction de l'état de connexion
+function vuetoken() {
+  const token = localStorage.getItem('token');
 
   const loginBtn = document.getElementById('login');
+  const logoutBtn = document.getElementById('logout');
   const barelogin = document.getElementById('barelogin');
   const filtres = document.getElementById('filtres');
   const ouvremodal = document.getElementById('ouvremodal');
 
   if (token) {
-    // Utilisateur connecté
     loginBtn.style.display = 'none';
     logoutBtn.style.display = 'flex';
     barelogin.style.display = 'flex';
-    filtres.style.display = 'none';  // cacher les filtres quand connecté
+    filtres.style.display = 'none';
     ouvremodal.style.display = 'block';
   } else {
-    // Utilisateur déconnecté
     loginBtn.style.display = 'flex';
     logoutBtn.style.display = 'none';
     barelogin.style.display = 'none';
-    filtres.style.display = 'flex'; // afficher les filtres quand déconnecté
+    filtres.style.display = 'flex';
     ouvremodal.style.display = 'none';
   }
-//  
+}
 
-  
+// Fonction logout qui supprime le token et met à jour l'interface
+function logout() {
+  const logoutBtn = document.getElementById('logout');
 
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    vuetoken(); 
+  });
+}
+
+vuetoken();
+logout();
 
 //  modal page 1
 
