@@ -83,18 +83,50 @@ function filterWorks(categoryId) {
   });
 }
 
-// Ajout de l'écouteur sur le select pour filtrer au changement
-const selectElement = document.getElementById('categories');
-if (selectElement) {
-  selectElement.addEventListener('change', () => {
-    filterWorks(selectElement.value);
-  });
-}
 
 // Lancer la récupération des catégories pour créer les boutons et options
 fetchCategories();
 
 
 
+// /: parite loguot
+ 
+// Fonction qui met à jour l'affichage en fonction de l'état de connexion
+function vuetoken() {
+  const token = localStorage.getItem('token');
+
+  const loginBtn = document.getElementById('login');
+  const logoutBtn = document.getElementById('logout');
+  const barelogin = document.getElementById('barelogin');
+  const filtres = document.getElementById('filtres');
+  const ouvremodal = document.getElementById('ouvremodal');
+
+  if (token) {
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'flex';
+    barelogin.style.display = 'flex';
+    filtres.style.display = 'none';
+    ouvremodal.style.display = 'block';
+  } else {
+    loginBtn.style.display = 'flex';
+    logoutBtn.style.display = 'none';
+    barelogin.style.display = 'none';
+    filtres.style.display = 'flex';
+    ouvremodal.style.display = 'none';
+  }
+}
+
+// Fonction logout qui supprime le token et met à jour l'interface
+function logout() {
+  const logoutBtn = document.getElementById('logout');
+
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    vuetoken(); 
+  });
+}
+
+vuetoken();
+logout();
 
 

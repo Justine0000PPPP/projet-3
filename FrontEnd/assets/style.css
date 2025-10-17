@@ -189,7 +189,8 @@
  
 
 	/*partie rajouté pour ex */
-#login, #logout {
+#login a,
+#logout a {
   cursor: pointer;
 }
 
@@ -571,22 +572,23 @@ page login */
 }
 
 .validate-button:enabled {
-  background-color:  #1D6154
-  opacity 1;
+  background-color: #1D6154;
+  
 }
 
-.modal-back {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+.modal-back, .modal-back2 {  
+  margin-left: 750px;
   background: none;
   border: none;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
   color: black;
-  z-index: 10;
+  
 }
+.modal-back2 {
+	margin-left: 0px;
+}	
 .upload-box {
   position: relative;
   width: 300px;
@@ -689,7 +691,7 @@ page login */
   width: 80%;
   margin: 0 auto 20px auto;
   height: 2px;
-  background-color: #1D6154;
+  background-color: #b1b1b1;
 }
 
 
@@ -705,42 +707,23 @@ nav ul li a {
 }
 
 
-/* position de la fleche et de la croix de la modal  */
 
-.formp2 {
-  display: block;
-  text-align: left;
-  margin-left: 0;
-}
-/* Assure-toi que le parent est en position relative */
-#modal-page2 {
-  position: relative;
-}
-
-/* Conteneur des boutons */
 .tetemodal {
-  
-  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+   padding: 0 100px; /*  apres 50 elle ne bouge plus meme si je vais plus haut */
   
 }
 
-#sortiep1 {
-  margin-left: 50px; 
-  cursor: pointer;   
+
+label[for="titre"],
+label[for="categories"] {
+  
+  margin: 1 em 230px 0,3em 0;
 }
 
 
 
 
 
-.formp2 {
-  display: block;
-  text-align: left;
-  margin: 1em 0 0.3em;
-  font-weight: 500;
-  color: #333;
-}

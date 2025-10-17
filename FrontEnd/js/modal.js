@@ -72,7 +72,7 @@ boutonsSortie.forEach(btn => {
 
     });
 
-
+  
 
 
 //  modal page 1
@@ -278,16 +278,16 @@ function validée() {
   const previewImage = document.getElementById('previewImage'); 
   const LoadedImage = previewImage && previewImage.src && previewImage.src.startsWith('blob:');
   const LoadedTitre = titreInput.value.trim().length > 0;
- const separator = document.querySelector('.separator'); // ← récupère la ligne
+  const CategorySelected = categoriesSelect.value !== '' && categoriesSelect.value.toLowerCase() !== 'choisir une catégorie';
 
-  if (LoadedImage && LoadedTitre && CategorySelected) {
-    validateBtn.disabled = false;
-    validateBtn.style.backgroundColor = 'green';
-    separator.style.backgroundColor = 'green'; 
+if (LoadedImage && LoadedTitre && CategorySelected) {
+  validateBtn.disabled = false;
+  validateBtn.style.backgroundColor = 'green';
+
 } else {
   validateBtn.disabled = true;
   validateBtn.style.backgroundColor = 'grey';
-  separator.style.backgroundColor = 'grey'; 
+
 }
 }
 
@@ -335,7 +335,7 @@ function fetchValidée() {
       alert("Photo ajoutée avec succès !");
 
 
-    // recharger la galerie après ajout
+    //   Optionnel : recharger la galerie après ajout
       fetchimage();
 
       // Réinitialiser le formulaire
@@ -344,7 +344,7 @@ function fetchValidée() {
       if (preview) preview.remove();
       document.querySelector('.upload-box i').style.display = 'block';
       addPhotoBtn.disabled = false;
-      addPhotoBtn.style = "";  
+      addPhotoBtn.style = ""; // reset style
 
     })
     .catch(error => {
