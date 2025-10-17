@@ -75,51 +75,6 @@ boutonsSortie.forEach(btn => {
 
 
 
-
-
-
-
-
-// /: parite loguot
- 
-// Fonction qui met à jour l'affichage en fonction de l'état de connexion
-function vuetoken() {
-  const token = localStorage.getItem('token');
-
-  const loginBtn = document.getElementById('login');
-  const logoutBtn = document.getElementById('logout');
-  const barelogin = document.getElementById('barelogin');
-  const filtres = document.getElementById('filtres');
-  const ouvremodal = document.getElementById('ouvremodal');
-
-  if (token) {
-    loginBtn.style.display = 'none';
-    logoutBtn.style.display = 'flex';
-    barelogin.style.display = 'flex';
-    filtres.style.display = 'none';
-    ouvremodal.style.display = 'block';
-  } else {
-    loginBtn.style.display = 'flex';
-    logoutBtn.style.display = 'none';
-    barelogin.style.display = 'none';
-    filtres.style.display = 'flex';
-    ouvremodal.style.display = 'none';
-  }
-}
-
-// Fonction logout qui supprime le token et met à jour l'interface
-function logout() {
-  const logoutBtn = document.getElementById('logout');
-
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('token');
-    vuetoken(); 
-  });
-}
-
-vuetoken();
-logout();
-
 //  modal page 1
 
 // Fonction pour récupérer et afficher les images dans la modal
@@ -380,16 +335,16 @@ function fetchValidée() {
       alert("Photo ajoutée avec succès !");
 
 
-    //   // Optionnel : recharger la galerie après ajout
-    //   fetchimage();
+    // recharger la galerie après ajout
+      fetchimage();
 
-    //   // Réinitialiser le formulaire
-    //   document.querySelector('.form-section').reset();
-    //   const preview = document.getElementById('previewImage');
-    //   if (preview) preview.remove();
-    //   document.querySelector('.upload-box i').style.display = 'block';
-    //   addPhotoBtn.disabled = false;
-    //   addPhotoBtn.style = ""; // reset style
+      // Réinitialiser le formulaire
+      document.querySelector('.form-section').reset();
+      const preview = document.getElementById('previewImage');
+      if (preview) preview.remove();
+      document.querySelector('.upload-box i').style.display = 'block';
+      addPhotoBtn.disabled = false;
+      addPhotoBtn.style = "";  
 
     })
     .catch(error => {

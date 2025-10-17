@@ -186,9 +186,13 @@
 		margin: 2em
 	}
 
-
+ 
 
 	/*partie rajouté pour ex */
+#login, #logout {
+  cursor: pointer;
+}
+
 /* bare login  */
 	#barelogin {
 	position: fixed;
@@ -680,11 +684,12 @@ page login */
 }
 
 /* Style de la ligne verte (séparateur) */
+
 .separator {
-  border-top: 2px solid  #1D6154 
-  margin 0 auto;              
-  width: 80%;                 
-  margin-bottom: 20px;        
+  width: 80%;
+  margin: 0 auto 20px auto;
+  height: 2px;
+  background-color: #1D6154;
 }
 
 
@@ -714,21 +719,23 @@ nav ul li a {
 
 /* Conteneur des boutons */
 .tetemodal {
-  position: absolute;
-  top: 10px;
-  left: 0;
+  
   right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  z-index: 10;
+  
 }
-#sortiep2 {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+
+#sortiep1 {
+  margin-left: 50px; 
+  cursor: pointer;   
 }
+
+
+
+
 
 .formp2 {
   display: block;
