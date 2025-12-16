@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./assets/style.css"> 
     
     <script src="js/login.js" defer></script>
-    
 </head>
 
 <body>
@@ -26,15 +25,23 @@
 
     <section id="login">
         <h2>Log In</h2> 
+
         <form id="loginform" action="#" method="post">
+
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required>
+
+            <p id="emailError" class="error-message" >Email incorrect</p>
+
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required> 
+            <input type="password" id="password" name="password" required>
+            <p id="passwordError" class="error-message">Mot de passe incorrect</p>
+
             <input type="submit" value="Se connecter"> 
             <p id="oublie">Mot de passe oublié ?</p>
+
         </form>
-        <p id="error-message" style="display: none;"></p>
+
     </section>
 
 </body>

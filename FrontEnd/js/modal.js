@@ -356,3 +356,5 @@ function fetchValidée() {
 
 // a verifier si vraiment nesessaire 
 document.getElementById('validateBtn').addEventListener('click', fetchValidée);
+
+

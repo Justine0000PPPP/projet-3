@@ -724,6 +724,14 @@ label[for="categories"] {
 }
 
 
+.error-message {
+    display: none;   
+    color: red;      
+    font-size: 0.9rem;
+    margin: 5px 0 10px 0;
+}
 
 
-
+.modifier-btn {
+    font-weight: normal !important;
+}

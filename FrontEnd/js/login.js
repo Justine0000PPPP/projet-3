@@ -51,3 +51,29 @@ login.addEventListener('submit', async(event) => {
 }); }
 loginbtn()
 
+
+document.getElementById("loginform").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+    emailError.style.display = "none";
+    passwordError.style.display = "none";
+
+    let valid = true;
+
+
+    if (email !== "sophie.bluel@test.tld") {
+        emailError.style.display = "block";
+        valid = false;
+    }
+
+    if (password !== "S0phie") {
+        passwordError.style.display = "block";
+        valid = false;
+    }
+ }
+);
