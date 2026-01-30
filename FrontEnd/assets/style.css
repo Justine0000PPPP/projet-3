@@ -505,18 +505,16 @@ page login */
 }
 
 .upload-button {
-  background-color: #e0e6ed;
+ background-color: #ca8080; /* gris clair */
+  color: #842e2e;
   border: none;
   padding: 10px 15px;
   border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s;
+
 }
 
-.upload-button:hover {
-  background-color: #d0d8e0;
-}
 
 .file-info {
   font-size: 12px;
@@ -597,11 +595,16 @@ page login */
   overflow: hidden;
   margin: 20px auto;      
   align-self: center;
-  background-color: rgb(201, 219, 219);
+    background-color: #f2f2f2;
   padding: 20px;          
   border-radius: 8px;     
   text-align: center;     
   color: white;           
+}
+.upload-box .upload-button {
+  background-color: #e6e6e6;
+  color: #777;
+  border: none;
 }
 
 .upload-box img#previewImage {
@@ -639,7 +642,7 @@ page login */
   font-size: 64px;          
   margin-bottom: 15px;      
   display: block;           
-  color: rgb(115, 138, 117);       
+ color: #9a9a9a; 
 }
 
 .upload-box i.fa-image:hover {
@@ -662,14 +665,31 @@ page login */
   margin: 0 auto;
 }
 
-/* Champs texte et select */
+#modal-page2 .form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligne tout à gauche */
+  width: 100%;
+  max-width: 350px;       /* largeur maximale des champs */
+  margin-bottom: 15px;
+}
 
-#modal-page2 input[type="text"],
-#modal-page2 select {
-  width: 300px;
-  max-width: 90vw;
+#modal-page2 .form-section label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+  color: #333;
+}
+
+#modal-page2 .form-section input,
+#modal-page2 .form-section select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
   box-sizing: border-box;
-  margin-bottom: 15px; 
 }
 
 
@@ -717,11 +737,6 @@ nav ul li a {
 }
 
 
-label[for="titre"],
-label[for="categories"] {
-  
-  margin: 1 em 230px 0,3em 0;
-}
 
 
 .error-message {
@@ -735,3 +750,5 @@ label[for="categories"] {
 .modifier-btn {
     font-weight: normal !important;
 }
+
+

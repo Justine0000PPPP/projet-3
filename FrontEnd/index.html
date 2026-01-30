@@ -60,7 +60,7 @@
 	</section>
  
 
-	<a href="#modal" class="js-modal invisible-link">Ouvrir la modal</a>
+	
 	<aside id="modal" class="modal">
 		<div id="modal-page1" style="display: block;"> 
 			<button id="sortiep1" class="modal-back"><i class="fa-solid fa-xmark"></i></button>
@@ -75,42 +75,41 @@
 		</div> 
 		
 		
-		<div id="modal-page2" style="display: none;">
-			
-<div class="tetemodal">
-	<button id="retourp2" class="modal-back2"><i class="fa-solid fa-arrow-left arrox"></i></button>
-	
-	<button id="sortiep2" class="modal-back2"><i class="fa-solid fa-xmark"></i></button>
+	<div id="modal-page2" style="display: none;">
+  <div class="tetemodal">
+    <button id="retourp2" class="modal-back2"><i class="fa-solid fa-arrow-left arrox"></i></button>
+    <button id="sortiep2" class="modal-back2"><i class="fa-solid fa-xmark"></i></button>
+  </div>		
 
-</div>		
-			<h3 class="titre">Ajout photo</h3>
-		<form class="form-section">
-<div class="upload-section">
-  <div class="upload-box">
+  <h3 class="titre">Ajout photo</h3>
 
-<input type="file" id="fileInput" >
+  <form>
+    <div class="upload-section">
+      <div class="upload-box">
+        <input type="file" id="fileInput">
+        <button class="upload-button" type="button" id="addphotobtn">+ Ajouter photo</button>
+        <i class="fa-regular fa-image"></i>
+        <p class="file-info">jpg, png : 4 Mo max</p>
+      </div>
+    </div>
 
-<button class="upload-button" type="button" id="addphotobtn">+ Ajouter photo</button>
+    <!-- Champ Titre -->
+    <div class="form-section">
+      <label for="titre">Titre</label>
+      <input type="text" id="titre" name="titre" placeholder="" required /> 
+    </div>
 
-<i class="fa-regular fa-image"></i>
- 
-  <p class="file-info">jpg, png : 4 Mo max</p>
-  </div>
-</div>
+    <!-- Champ Catégorie -->
+    <div class="form-section">
+      <label for="categories">Catégories</label>
+      <select id="categories" name="categories">
+        <option value="">Choisir une catégorie</option>
+      </select>
+    </div>
 
-<label class="formp2" for="titre">Titre</label>
-<input type="text" id="titre" name="titre" placeholder="" required /> 
-
-<label class="formp2" for="categories">Catégories</label>
-<select id="categories" name="categories">
-  <option value="">Choisir une catégorie</option> <!-- Option par défaut à garder -->
-</select>
-<div class="separator"></div>
-<input type="submit" value="Valider" class="validate-button" id="validateBtn" disabled />
-</form>
-
- 
-
+    <div class="separator"></div>
+    <input type="submit" value="Valider" class="validate-button" id="validateBtn" disabled />
+  </form>
 </div>
 		
 	</aside>

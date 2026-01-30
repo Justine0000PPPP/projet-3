@@ -1,3 +1,6 @@
+// Déclaration globale pour la modal
+let modal = null;
+
 async function works() {
   try {
     const response = await fetch('http://localhost:5678/api/works');
@@ -6,12 +9,26 @@ async function works() {
     const data = await response.json();
 
     const portfolioSection = document.getElementById('portfolio');
-    portfolioSection.innerHTML = ''; // vide la section avant de remplir
+    const photomodalSection = document.getElementById('photomodal');
 
+    // Supprime l'ancienne galerie principale si elle existe
+    const oldGallery = portfolioSection.querySelector('.gallery');
+    if (oldGallery) oldGallery.remove();
+
+    // Supprime l'ancienne galerie de la modal si elle existe
+    const oldModalGallery = photomodalSection.querySelector('.gallery-modal');
+    if (oldModalGallery) oldModalGallery.remove();
+
+    // 🌟 Création de la galerie principale
     const galleryDiv = document.createElement('div');
     galleryDiv.classList.add('gallery');
 
+    // 🌟 Création de la galerie modal page 1
+    const galleryDivModal = document.createElement('div');
+    galleryDivModal.classList.add('gallery-modal');
+
     data.forEach(work => {
+      // Galerie principale
       const figure = document.createElement('figure');
       figure.setAttribute('data-category-id', work.category.id);
 
@@ -24,19 +41,48 @@ async function works() {
 
       figure.appendChild(img);
       figure.appendChild(figcaption);
-
       galleryDiv.appendChild(figure);
+
+      // Galerie modal
+      const figureModal = document.createElement('figure');
+      figureModal.setAttribute('data-category-id', work.category.id);
+
+      const imgModal = document.createElement('img');
+      imgModal.src = work.imageUrl;
+      imgModal.alt = work.title;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.title = "Supprimer cette photo";
+
+      const trashIcon = document.createElement('img');
+      trashIcon.src = './assets/images/icone-poubelle.webp';
+      trashIcon.alt = 'Supprimer';
+      trashIcon.style.width = '20px';
+      trashIcon.style.height = '20px';
+
+      deleteBtn.appendChild(trashIcon);
+      deleteBtn.addEventListener('click', () => {
+        deleteimage(work.id, figureModal);
+      });
+
+      figureModal.appendChild(imgModal);
+      figureModal.appendChild(deleteBtn);
+
+      galleryDivModal.appendChild(figureModal);
     });
 
     portfolioSection.appendChild(galleryDiv);
-    
-    return data; // retourne les works si nécessaire
+    photomodalSection.appendChild(galleryDivModal);
+
+    return data; // utile si tu veux filtrer ensuite
   } catch (error) {
     console.error('Erreur lors de la récupération des works :', error);
   }
 }
 
-works()
+// Appel initial
+works();
 
 function createCategoryButtons(categories) {
   const filtresSection = document.getElementById('filtres');
@@ -64,10 +110,14 @@ function createCategoryButtons(categories) {
 // Récupération des catégories, création des boutons et des options dans le select
 function fetchCategories() {
   fetch('http://localhost:5678/api/categories')
-    .then(response => {
-      if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
-      return response.json();
-    })
+   .then(async response => {
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Réponse API :", errorText);
+    throw new Error(errorText);
+  }
+    return response.json();
+})
     .then(categories => {
       createCategoryButtons(categories);
 } )}
@@ -175,15 +225,15 @@ function closemodal(e) {
     link.addEventListener('click', openmodal);
     });
 
-//     // Ajout de l'écouteur pour fermer la modal avec le bouton "sortie"
-//     const boutonsSortie = [document.getElementById('sortiep1'), document.getElementById('sortiep2')];
+    // Ajout de l'écouteur pour fermer la modal avec le bouton "sortie"
+    const boutonsSortie = [document.getElementById('sortiep1'), document.getElementById('sortiep2')];
 
-// // Ajoute l'écouteur à chacun s'il existe
-// boutonsSortie.forEach(btn => {
-//   if (btn) {
-//     btn.addEventListener('click', fermerModal);
-//   }
-// });
+// Ajoute l'écouteur à chacun s'il existe
+boutonsSortie.forEach(btn => {
+  if (btn) {
+    btn.addEventListener('click', fermerModal);
+  }
+});
 
     // Gestion de l'apparition des pages dans la modal
     const page1 = document.getElementById('modal-page1');
@@ -262,8 +312,9 @@ function fetchimage() {
             photomodalSection.appendChild(galleryDivModal);
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des images:', error);
-        });
+  console.error("Erreur API détaillée :", error.message);
+  alert(error.message);
+});
 }
 
 
@@ -305,6 +356,7 @@ function deleteimage(id, figureElement) {
     const titreInput = document.getElementById('titre');
     const categoriesSelect = document.getElementById('categories');
     const validateBtn = document.getElementById('validateBtn');
+ 
     function addimages() {
 
     // 2. Lorsqu'on clique sur le bouton visible, on simule un clic sur l'input caché
@@ -321,8 +373,7 @@ function deleteimage(id, figureElement) {
         alert("Aucun fichier sélectionné.");
         return;
       }
-
-      const validTypes = ['image/png', 'image/jpg'];
+const validTypes = ['image/png', 'image/jpg', 'image/jpeg'];
       if (!validTypes.includes(file.type)) {
         alert("Seules les images PNG ou JPG sont autorisées.");
         fileInput.value = "";         return;
@@ -427,7 +478,7 @@ function fetchValidée() {
   const formData = new FormData();
   formData.append("image", file);
   formData.append("title", title);
-  formData.append("category", category);
+formData.append("category", Number(category));
 
   fetch("http://localhost:5678/api/works", {
     method: "POST",
@@ -442,25 +493,25 @@ function fetchValidée() {
       }
       return response.json();
     })
-    .then(data => {
-      console.log("Image ajoutée :", data);
-      alert("Photo ajoutée avec succès !");
+.then(data => {
+  console.log("Image ajoutée :", data);
+  alert("Photo ajoutée avec succès !");
 
+  fetchimage();   // 🔹 recharge la galerie de la modal
+  works();        // 🔥 recharge la galerie PRINCIPALE
+  fermerModal();  // 🔥 ferme la modal et retour page principale
 
-      fetchimage();
-
-      document.querySelector('.form-section').reset();
-      const preview = document.getElementById('previewImage');
-      if (preview) preview.remove();
-      document.querySelector('.upload-box i').style.display = 'block';
-      addPhotoBtn.disabled = false;
-      addPhotoBtn.style = "";
-
-    })
-    .catch(error => {
-      console.error(error);
-      alert("Erreur lors de l'ajout.");
-    });
+  document.querySelector('.form-section').reset();
+  const preview = document.getElementById('previewImage');
+  if (preview) preview.remove();
+  document.querySelector('.upload-box i').style.display = 'block';
+  addPhotoBtn.disabled = false;
+  addPhotoBtn.style = "";
+})
+.catch(error => {
+  console.error("Erreur API :", error);
+  alert("Erreur lors de l'ajout (voir console)");
+});
 }
 
 

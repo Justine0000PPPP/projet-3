@@ -1,79 +1,50 @@
+document.addEventListener("DOMContentLoaded", () => {
+  initLogin();
+});
 
-//  document.addEventListener('DOMContentLoaded', () => {
-function loginbtn() { 
-let login = document.getElementById('loginform');
-login.addEventListener('submit', async(event) => {
-  event.preventDefault();  
-  //  Récupération des valeurs des champs
-    const email = document.getElementById('email').value;  
-  const password = document.getElementById('password').value;
+function initLogin() {
 
-  //  Construction des données à envoyer
-  const data = {
-    email: email, 
-    password: password
-  };
+  const form = document.getElementById("loginform");
+  const emailError = document.getElementById("emailError");
+  const passwordError = document.getElementById("passwordError");
 
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-  //  Envoi des données via fetch
-  fetch('http://localhost:5678/api/users/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)  // transforme en JSON avant d’envoyer
-  }) 
-  
-  .then(response => {
-    if (response.status === 200) { 
-        return response.json(); 
-    } else  
-      { throw new Error("identifient n nul");
-       }
-  })     
-  .then(data => {
-    // Enregistrer le token dans le localStorage
-    localStorage.setItem('token', data.token);
-
-    // Rediriger vers index.html  
-    window.location.href = 'index.html';  
-    })
-  .catch(error => {
-    //  Affichage du message d'erreur dans la page
-    const errorDiv = document.getElementById('error-message');
-    if (errorDiv) {
-      errorDiv.textContent = error.message;
-      errorDiv.style.display = 'block';
-    } else {
-      alert(error.message); 
-    }
-  });
-}); }
-loginbtn()
-
-
-document.getElementById("loginform").addEventListener("submit", function(event) {
-    event.preventDefault(); 
-
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
-
+    // Reset erreurs
     emailError.style.display = "none";
     passwordError.style.display = "none";
 
-    let valid = true;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
+    try {
+      const response = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-    if (email !== "sophie.bluel@test.tld") {
+      if (!response.ok) {
+        // identifiants incorrects
         emailError.style.display = "block";
-        valid = false;
-    }
-
-    if (password !== "S0phie") {
         passwordError.style.display = "block";
-        valid = false;
+        return;
+      }
+
+      const data = await response.json();
+
+      // Stockage du token
+      localStorage.setItem("token", data.token);
+
+      // Redirection
+      window.location.href = "index.html";
+
+    } catch (error) {
+      console.error("Erreur login :", error);
+      alert("Erreur serveur. Réessayez plus tard.");
     }
- }
-);
+  });
+}
