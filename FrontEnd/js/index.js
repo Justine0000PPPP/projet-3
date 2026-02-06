@@ -226,6 +226,7 @@
       document.getElementById('ajouterphoto').addEventListener('click', () => {
           page1.style.display = 'none';      
           page2.style.display = 'block'; 
+        
           fetchselect();
       });
 
@@ -393,22 +394,19 @@
 
 
   function fetchselect() {
+categoriesSelect.innerHTML = "";
     fetch('http://localhost:5678/api/categories')
       .then(response => {
         if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
         return response.json();
       })
       .then(categories => {
-      
-      
-        const select = document.getElementById('categories');
-
 
           categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category.id;
             option.textContent = category.name;
-            select.appendChild(option);
+            categoriesSelect.appendChild(option);
           });
       
       
@@ -425,11 +423,11 @@
 
   if (LoadedImage && LoadedTitre && CategorySelected) {
     validateBtn.disabled = false;
-    validateBtn.style.backgroundColor = 'green';
+    validateBtn.style.backgroundColor = '#1D6154';
 
   } else {
     validateBtn.disabled = true;
-    validateBtn.style.backgroundColor = 'grey';
+    validateBtn.style.backgroundColor = '#9a9a9a';
 
   }
   }
