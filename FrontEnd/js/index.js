@@ -1,140 +1,142 @@
 
   let modal = null;
 
-  async function works() {
-    try {
-      const response = await fetch('http://localhost:5678/api/works');
-      if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
+  // const
+const API_WORKS = 'http://localhost:5678/api/works';
 
-      const data = await response.json();
+const portfolioSection = document.getElementById('portfolio');
+const photomodalSection = document.getElementById('photomodal');
+const API_CATEGORIES = 'http://localhost:5678/api/categories';
+const filtresSection = document.getElementById('filtres');
+const page1 = document.getElementById('modal-page1');
+const page2 = document.getElementById('modal-page2');
 
-      const portfolioSection = document.getElementById('portfolio');
-      const photomodalSection = document.getElementById('photomodal');
+async function works() {
+  try {
+    const response = await fetch(API_WORKS);
+    if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
 
+    const data = await response.json();
 
-      const oldGallery = portfolioSection.querySelector('.gallery');
-      if (oldGallery) oldGallery.remove();
+    // Suppression des anciennes galeries
+    const oldGallery = portfolioSection.querySelector('.gallery');
+    if (oldGallery) oldGallery.remove();
 
+    const oldModalGallery = photomodalSection.querySelector('.gallery-modal');
+    if (oldModalGallery) oldModalGallery.remove();
 
-      const oldModalGallery = photomodalSection.querySelector('.gallery-modal');
-      if (oldModalGallery) oldModalGallery.remove();
+    // Création des nouvelles galeries
+    const galleryDiv = document.createElement('div');
+    galleryDiv.classList.add('gallery');
 
-      const galleryDiv = document.createElement('div');
-      galleryDiv.classList.add('gallery');
+    const galleryDivModal = document.createElement('div');
+    galleryDivModal.classList.add('gallery-modal');
 
+    data.forEach(work => {
+      // ----- Galerie principale -----
+      const figure = document.createElement('figure');
+      figure.setAttribute('data-category-id', work.category.id);
 
-      const galleryDivModal = document.createElement('div');
-      galleryDivModal.classList.add('gallery-modal');
+      const img = document.createElement('img');
+      img.src = work.imageUrl;
+      img.alt = work.title;
 
-      data.forEach(work => {
+      const figcaption = document.createElement('figcaption');
+      figcaption.textContent = work.title;
 
-        const figure = document.createElement('figure');
-        figure.setAttribute('data-category-id', work.category.id);
+      figure.append(img, figcaption);
+      galleryDiv.appendChild(figure);
 
-        const img = document.createElement('img');
-        img.src = work.imageUrl;
-        img.alt = work.title;
+      // ----- Galerie modal -----
+      const figureModal = document.createElement('figure');
+      figureModal.setAttribute('data-category-id', work.category.id);
 
-        const figcaption = document.createElement('figcaption');
-        figcaption.textContent = work.title;
+      const imgModal = document.createElement('img');
+      imgModal.src = work.imageUrl;
+      imgModal.alt = work.title;
 
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-        galleryDiv.appendChild(figure);
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.title = 'Supprimer cette photo';
 
-        const figureModal = document.createElement('figure');
-        figureModal.setAttribute('data-category-id', work.category.id);
+      const trashIcon = document.createElement('img');
+      trashIcon.src = './assets/images/icone-poubelle.webp';
+      trashIcon.alt = 'Supprimer';
+      trashIcon.style.width = '20px';
+      trashIcon.style.height = '20px';
 
-        const imgModal = document.createElement('img');
-        imgModal.src = work.imageUrl;
-        imgModal.alt = work.title;
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.title = "Supprimer cette photo";
-
-        const trashIcon = document.createElement('img');
-        trashIcon.src = './assets/images/icone-poubelle.webp';
-        trashIcon.alt = 'Supprimer';
-        trashIcon.style.width = '20px';
-        trashIcon.style.height = '20px';
-
-        deleteBtn.appendChild(trashIcon);
-        deleteBtn.addEventListener('click', () => {
-          deleteimage(work.id, figureModal);
-        });
-
-        figureModal.appendChild(imgModal);
-        figureModal.appendChild(deleteBtn);
-
-        galleryDivModal.appendChild(figureModal);
+      deleteBtn.appendChild(trashIcon);
+      deleteBtn.addEventListener('click', () => {
+        deleteimage(work.id, figureModal);
       });
 
-      portfolioSection.appendChild(galleryDiv);
-      photomodalSection.appendChild(galleryDivModal);
-
-      return data;
-    } catch (error) {
-      console.error('Erreur lors de la récupération des works :', error);
-    }
-  }
-
-  works();
-
-  function createCategoryButtons(categories) {
-    const filtresSection = document.getElementById('filtres');
-
-    filtresSection.innerHTML = '';
-
-    const btnAll = document.createElement('button');
-    btnAll.textContent = "Tous";
-    btnAll.dataset.categoryId = 'all';
-    btnAll.addEventListener('click', () => filterWorks('all'));
-    filtresSection.appendChild(btnAll);
-
-    categories.forEach(category => {
-      const btn = document.createElement('button');
-      btn.textContent = category.name;
-      btn.dataset.categoryId = category.id;
-      btn.addEventListener('click', () => filterWorks(category.id));
-      filtresSection.appendChild(btn);
+      figureModal.append(imgModal, deleteBtn);
+      galleryDivModal.appendChild(figureModal);
     });
+
+    portfolioSection.appendChild(galleryDiv);
+    photomodalSection.appendChild(galleryDivModal);
+
+    return data;
+
+  } catch (error) {
+    console.error('Erreur lors de la récupération des works :', error);
   }
+}
+
+works();
+
+function createCategoryButtons(categories) {
+  filtresSection.innerHTML = '';
+
+  const btnAll = document.createElement('button');
+  btnAll.textContent = 'Tous';
+  btnAll.dataset.categoryId = 'all';
+  btnAll.addEventListener('click', () => filterWorks('all'));
+  filtresSection.appendChild(btnAll);
+
+  categories.forEach(category => {
+    const btn = document.createElement('button');
+    btn.textContent = category.name;
+    btn.dataset.categoryId = category.id;
+    btn.addEventListener('click', () => filterWorks(category.id));
+    filtresSection.appendChild(btn);
+  });
+}
 
   
-  function fetchCategories() {
-    fetch('http://localhost:5678/api/categories')
+function fetchCategories() {
+  fetch(API_CATEGORIES)
     .then(async response => {
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Réponse API :", errorText);
-      throw new Error(errorText);
-    }
-      return response.json();
-  })
-      .then(categories => {
-        createCategoryButtons(categories);
-  } )}
-
-
-  function filterWorks(categoryId) {
-    const allFigures = document.querySelectorAll('#portfolio .gallery figure');
-
-    allFigures.forEach(figure => {
-      const figureCatId = figure.getAttribute('data-category-id');
-
-      if (categoryId === 'all' || figureCatId == categoryId) {
-        figure.style.display = 'block';
-      } else {
-        figure.style.display = 'none';
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Réponse API :', errorText);
+        throw new Error(errorText);
       }
+      return response.json();
+    })
+    .then(categories => {
+      createCategoryButtons(categories);
+    })
+    .catch(error => {
+      console.error('Erreur lors du fetch des catégories :', error);
     });
-  }
-
-
+}
   fetchCategories();
 
+function filterWorks(categoryId) {
+  const allFigures = document.querySelectorAll('#portfolio .gallery figure');
 
+  allFigures.forEach(figure => {
+    const figureCatId = figure.getAttribute('data-category-id');
+
+    if (categoryId === 'all' || figureCatId == categoryId) {
+      figure.style.display = 'block';
+    } else {
+      figure.style.display = 'none';
+    }
+  });
+}
 
   // /: parite loguot
   
@@ -217,10 +219,6 @@
       btn.addEventListener('click', fermerModal);
     }
   });
-
-      // Gestion de l'apparition des pages dans la modal
-      const page1 = document.getElementById('modal-page1');
-      const page2 = document.getElementById('modal-page2');
 
 
       document.getElementById('ajouterphoto').addEventListener('click', () => {
