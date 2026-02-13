@@ -250,7 +250,10 @@
 	background-color:  #1D6154;
 	color: white;
 	}
-
+#filtres button.active {
+    background-color: #1D6154; /* fond vert foncé */
+    color: white;              /* texte blanc */
+}
 /* 
 page login */
 	#login {

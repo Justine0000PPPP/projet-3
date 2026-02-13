@@ -85,23 +85,36 @@ async function works() {
 }
 
 works();
-
 function createCategoryButtons(categories) {
   filtresSection.innerHTML = '';
 
   const btnAll = document.createElement('button');
   btnAll.textContent = 'Tous';
   btnAll.dataset.categoryId = 'all';
-  btnAll.addEventListener('click', () => filterWorks('all'));
+  btnAll.addEventListener('click', (e) => {
+    filterWorks('all');
+    setActiveButton(e.target);
+  });
   filtresSection.appendChild(btnAll);
+
 
   categories.forEach(category => {
     const btn = document.createElement('button');
     btn.textContent = category.name;
     btn.dataset.categoryId = category.id;
-    btn.addEventListener('click', () => filterWorks(category.id));
+    btn.addEventListener('click', (e) => {
+      filterWorks(category.id);
+      setActiveButton(e.target);
+    });
     filtresSection.appendChild(btn);
   });
+}
+
+
+function setActiveButton(activeBtn) {
+  const allButtons = document.querySelectorAll('#filtres button');
+  allButtons.forEach(btn => btn.classList.remove('active')); // retire actif de tous
+  activeBtn.classList.add('active'); // ajoute actif au bouton cliqué
 }
 
   
@@ -136,7 +149,7 @@ function filterWorks(categoryId) {
       figure.style.display = 'none';
     }
   });
-}
+} 
 
   // /: parite loguot
   
