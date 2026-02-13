@@ -372,6 +372,7 @@ page login */
 
 	#modal-page2 {
 	position: relative;
+	display: none;
 	}
 
 .titre {

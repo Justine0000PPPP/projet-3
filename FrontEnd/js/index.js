@@ -399,6 +399,11 @@ categoriesSelect.innerHTML = "";
         return response.json();
       })
       .then(categories => {
+        const choix =document.createElement('option');
+         choix.value = "";
+         choix.innerHTML = "Choisir une catégorie";
+
+        categoriesSelect.appendChild(choix);
 
           categories.forEach(category => {
             const option = document.createElement('option');
